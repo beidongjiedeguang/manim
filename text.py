@@ -1,5 +1,6 @@
 from manimlib import *
 
+
 class TextExample(Scene):
     def construct(self):
         text = Text("Here is a text", font="Consolas", font_size=90)
@@ -18,7 +19,7 @@ class TextExample(Scene):
         self.wait(3)
 
         fonts = Text(
-            "And you can also set the font according to different words",
+            " And you can also set the font according to different words",
             font="Arial",
             t2f={"font": "Consolas", "words": "Consolas"},
             t2c={"font": BLUE, "words": GREEN}
@@ -36,6 +37,11 @@ class TextExample(Scene):
         self.wait()
         self.play(Write(slant))
         self.wait()
+
+class Chinese(Scene):
+    def construct(self):
+        text = Text("这里是中a文。 askdjf ", font_size=90)
+        self.play(Write(text))
 
 
 class TexTransformExample(Scene):
