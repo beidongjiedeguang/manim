@@ -17,10 +17,10 @@ directories:
   # specify them elsewhere,
   temporary_storage: ""
 universal_import_line: "from manim_imports_ext import *"
-#tex:
-#   executable: "xelatex -no-pdf"
-#   template_file: "ctex_template.tex"
-#   intermediate_filetype: "xdv"
+tex:
+   executable: "xelatex -no-pdf"
+   template_file: "ctex_template.tex"
+   intermediate_filetype: "xdv"
 
 style:
   font: "Consolas"

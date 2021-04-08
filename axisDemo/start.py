@@ -10,7 +10,7 @@ class Demo1(Scene):
                                  numbers_to_exclude=[],
                                  )
         # number_line.rotate(90 * DEGREES)
-        number_line.add_numbers()
+        number_line.add_numbers([0, 1, 2])
         number_line.add_tip()
 
         self.play(Write(number_line))

@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fa4a00a-2649-48ff-b17c-36975ce5718e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/axisDemo/start.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geometry/start.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demoAxis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/tex_templates/tex_template.tex" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/tex_templates/tex_template.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/axisDemo/start.py" beforeDir="false" afterPath="$PROJECT_DIR$/axisDemo/start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/custom_config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
