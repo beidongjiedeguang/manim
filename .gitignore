@@ -1,5 +1,11 @@
 .idea/
 
+# For manim
+/videos
+#/custom_config.yml
+
+
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -143,7 +149,3 @@ dmypy.json
 # End of https://www.toptal.com/developers/gitignore/api/python
 # Custom exclusions:
 .DS_Store
-
-# For manim
-/videos
-/custom_config.yml
