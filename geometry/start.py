@@ -1,8 +1,8 @@
 from manim_imports_ext import *
+from .utils import *
 
 class Demo1(Scene):
     def construct(self):
-
         # https://www.bilibili.com/video/BV1kA411b7kq/?spm_id_from=333.788.recommend_more_video.-1
 
         circle = Circle()
@@ -24,7 +24,6 @@ class Demo1(Scene):
                   angle=90*DEGREES,
                   color=RED,
                   )
-        # arc.move_to(3*LEFT)
         self.play(ShowCreation(arc))
 
 
@@ -35,37 +34,25 @@ class Demo1(Scene):
         )
         self.play(ShowCreation(curveArrow))
 
+def to_point(func, x):
+    return 
 
-class Demo2(Scene):
+def get_graph(axes, func, color):
+    pass
+
+
+
+
+class RemoveAllObjectsInScreen(Scene):
     def construct(self):
-        origin, R = ORIGIN, 2
-        particle = Circle(
-            arc_center=origin,
-            radius=R,
-            stroke_width=5,
-            stroke_color=WHITE,
-            fill_color=BLACK,
-            fill_opacity=0.1,
-        )
-        self.play(ShowCreation(particle))
+        self.play(
+            ShowCreation(
+                VGroup(*[
+                    VGroup(*[Dot() for i in range(30)]).arrange(RIGHT)
+                    for j in range(10)
+                ]).arrange(DOWN)))
+        self.play(*[FadeOut(mob) for mob in self.mobjects]
+                  # All mobjects in the screen are saved in self.mobjects
+                  )
 
-        height1 = R * 3/4
-        ray_1 = Arrow(
-            np.array([-1, height1, 0]),
-            np.array([1, height1, 0])
-        )
-
-        self.play(ShowCreation(ray_1))
-
-        ray_2 = TangentLine(particle,
-                            alpha=0.25,
-                            length=5)
-
-        self.play(ShowCreation(ray_2))
-        ray_3 = TangentLine(particle,
-                            alpha=0.75,
-                            length=5)
-        self.play(ShowCreation(ray_3))
-
-
-
+        self.wait()
