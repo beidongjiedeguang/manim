@@ -19,7 +19,7 @@ class ScatteringModel(Scene):
 
         for rays in p1.get_lights():
             for i in rays:
-               self.play(ShowCreation(i),  run_time=0.3)
+               self.play(ShowCreation(i),  run_time=0.2)
 
 
 

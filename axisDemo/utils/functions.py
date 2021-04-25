@@ -5,7 +5,7 @@ import sympy
 import warnings
 # from guang.sci.scattering import
 # from manimlib.mobject.coordinate_systems import
-from manimlib.utils.space_ops import rotate_vector
+from manimlib.utils.space_ops import rotate_vector, line_intersection
 from manimlib.utils.space_ops import angle_of_vector, normalize, get_unit_normal, angle_between_vectors
 
 
@@ -36,10 +36,23 @@ class SolveSystem:
 
         return intersections
 
-    def get_circle_func(self, origin, r):
+    def get_circle_sfunc(self, origin, r):
         return (self.x - origin[0])**2 + (self.y-origin[1])**2 - r**2
 
-    def get_line_func(self, p0, p1=None, direction=None):
+    def line_func(self, p0, direction):
+        p0 = np.array(p0)
+        direction = np.array(direction)
+        if direction[0] != 0:
+            k = direction[1] / direction[0]
+            return lambda x, y:(y - p0[1]) - k * (x - p0[0])
+        elif direction[1] != 0:
+            k = direction[0] / direction[1]
+            return lambda x, y: k * (y - p0[1]) - (x - p0[0])
+        else:
+            raise ValueError("point's x and y cann't be both zero!")
+
+
+    def get_line_sfunc(self, p0, p1=None, direction=None):
         p0 = np.array(p0)
 
         if p1 is not None:
@@ -56,7 +69,6 @@ class SolveSystem:
         elif direction is not None:
             # 2d
             direction = np.array(direction)
-            print(direction)
             if direction[0] != 0:
                 k = direction[1]/direction[0]
                 return (self.y - p0[1]) - k*(self.x - p0[0])
@@ -135,17 +147,10 @@ class SolveSystem:
 
 
 
-def refraction(theta_i, n_from, n_to):
-    # snell_law
-    # n1* np.sin(theta1) = n2 * np.sin(theta2)
-    theta_r = np.arcsin(n_from/n_to * np.sin(theta_i))
-    return theta_r
-
-
 if __name__ == "__main__":
     ss = SolveSystem()
-    eq1 = ss.get_line_func([1, 1], direction=[1, -1])
-    eq2 = ss.get_circle_func([0, 1], 1)
+    eq1 = ss.get_line_sfunc([1, 1], direction=[1, -1])
+    eq2 = ss.get_circle_sfunc([0, 1], 1)
     print(eq2)
     print(ss.sym2numerical(eq2, x=1, y=2))
     # number = eq2.subs([(ss.x,1), (ss.y, 2)])

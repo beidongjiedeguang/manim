@@ -1,65 +1,26 @@
 from manim_imports_ext import *
 from .utils import *
 
-class Demo2(Scene):
+class Particle(Scene):
 
     def construct(self):
+        origin, R = LEFT*2, 2
+        particle = circ(origin, R)
+        self.play(ShowCreation(particle))
 
-        # axis = Axes(
-        #     [-8, 8],
-        #     [-8, 8]
-        # )
-        axes = Axes(
-            x_range=(-5, 5),
-            y_range=(-5, 5),
-            height=7,
-            width=7,
-            axis_config={
-                # "include_tip": False,
-                "numbers_to_exclude": [],
-            }
-        )
-        # axes.set_x(0)
-        axes.add_coordinate_labels()
-        origin, R = LEFT*2, 3
+        for theta in np.linspace(PI/2, PI, 20):
+            def add_rays(obj, theta1, particle, p=3):
+                point1 = particle.get_point_from_function(theta1)
+                point0 = np.array([-10, point1[1], point1[2]])
 
+                ray1 = Arrow(point0, point1,buff=0)
+                obj.play(ShowCreation(ray1, run_time=0.1))
 
-        # particle = Circle(
-        #     arc_center=origin,
-        #     radius=R,
-        #     stroke_width=5,
-        #     stroke_color=BLACK,
-        #     # fill_color=BLACK,
-        #     # fill_opacity=0.1,
-        # )
-        particle=circ(origin, R)
+                theta_i = PI - theta1
+                theta_r = calc_theta_r(theta_i, 1, 1.33)
 
+                add_all_rays(obj, point1, theta_i, theta_r, theta1, particle, pn=p,
+                             show_in_rays=False, show_out_rays=True,
+                             color_out=GREEN)
 
-        self.play(
-            ShowCreation(axes),
-            ShowCreation(particle),
-            # FadeIn(particle, RIGHT),
-        )
-
-        line1 = Line(np.array([-2, 1, 0]), np.array([2, -1, 0]))
-        self.add(line1)
-
-        for i in np.linspace(-R+origin[0], R+origin[0], 10):
-
-            (circx, circy) = getCircPos(R, origin, x=i, unit=1)
-
-            self.play(ShowCreation(createRay([circx, 6], [circx, circy])), run_time=0.2)
-
-        ray_2 = TangentLine(particle,
-                            alpha=0.15,
-                            length=5,
-                            color=BLACK)
-        # ray_2.set_color(BLACK)
-
-        self.play(ShowCreation(ray_2))
-        ray_3 = TangentLine(particle,
-                            alpha=0.75,
-                            length=5,
-                            color=BLACK)
-        # ray_3.set_color(BLACK)
-        self.play(ShowCreation(ray_3))
+            add_rays(self, theta, particle, 3)

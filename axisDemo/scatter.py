@@ -116,8 +116,8 @@ class SimgleRay(ParticleSystem):
 
 
     def line_circ_intersect(self,p0, direction, r, origin):
-        line_eq = self.ss.get_line_func(p0, direction=direction)
-        circ_eq = self.ss.get_circle_func(origin=origin, r=r)
+        line_eq = self.ss.get_line_sfunc(p0, direction=direction)
+        circ_eq = self.ss.get_circle_sfunc(origin=origin, r=r)
         # print(line_eq, '\n', circ_eq)
         result_points = self.ss.solve2(line_eq, circ_eq, precision=5)
         if direction[0] > 0:

@@ -54,3 +54,95 @@ def circ(origin, r):
         color=RED
     )
     return circle
+
+
+def get_circ_normal(point, origin):
+    '''3d inputs'''
+    print(point, origin, 'point and origin')
+    point, origin = np.array(point), np.array(origin)
+    normal = np.array([point[0]-origin[0], point[1] - origin[1], point[2] - origin[2] ])
+    return normalize(normal)
+
+def reflect(direction, normal, p):
+    direction = np.array(direction)
+    normal = np.array(normal)
+    angle = angle_between_vectors( direction, normal)
+    if p == 0:
+        angle = angle if np.pi - angle > angle else np.pi - angle
+        angle = -angle
+    # else:
+    #     angle = -angle
+    reflect_direction = rotate_vector(normal, angle)
+    return reflect_direction
+
+def in_reflect(direction, normal):
+    direction = np.array(direction)
+    normal = np.array(normal)
+    angle = angle_between_vectors( direction, normal)
+    # angle = angle if np.pi - angle > angle else np.pi - angle
+    reflect_direction = rotate_vector(normal, -angle)
+    return reflect_direction
+
+def get_incident_angle(direction, normal):
+    direction, normal = np.array(direction), np.array(normal)
+    angle = angle_between_vectors(direction, normal)
+    angle = angle if np.pi - angle > angle else np.pi - angle
+    return angle
+
+def get_refraction_direction(direction, normal, n_from, n_to, p=0):
+    theta_i = get_incident_angle(direction, normal)
+    # snell_law
+    # n1* np.sin(theta1) = n2 * np.sin(theta2)
+    theta_r = np.arcsin(n_from / n_to * np.sin(theta_i))
+
+    if p == 0:
+        refraction_direction = normalize(rotate_vector(-normal, theta_r))
+    else:
+        refraction_direction = normalize(rotate_vector(normal, -theta_r))
+
+    return refraction_direction
+
+
+def get_theta_def(theta_i, theta_r, p):
+    return 2* p * theta_r - 2 * theta_i - (p-1)*PI
+
+
+def add_in_rays(obj, point1, point2, color=GREEN):
+    ray = Arrow(point1, point2, buff=0)
+    ray.set_color(color)
+    obj.play(ShowCreation(ray), run_time=0.2)
+
+
+def add_out_rays(obj, theta_def, point1, color=None):
+    dx = 1 if abs(theta_def) < PI / 2 else -1
+    dy = np.tan(theta_def) / dx
+    norm_vec = normalize(np.array([dx, dy, 0]))
+    point_out = point1 + 3 * norm_vec
+    ray = Arrow(point1, point_out, buff=0, thickness=0.01)
+    ray.set_color(color)
+    obj.play(ShowCreation(ray), run_time=0.1)
+
+def add_all_rays(obj, point1, theta_i, theta_r, theta0, particle, pn,
+                 show_in_rays=True, show_out_rays=True,
+                 color_in=None, color_out=None):
+    for p in range(pn):
+        theta_def = get_theta_def(theta_i, theta_r, p)
+        print(theta_def, np.tan(theta_def))
+
+        if show_out_rays:
+            add_out_rays(obj, theta_def, point1, color=color_out)
+
+        theta = theta0 - (PI - 2 * theta_r)
+        point2 = particle.get_point_from_function(theta)
+
+        if show_in_rays:
+            add_in_rays(obj, point1, point2, color=color_in)
+
+        point1 = point2
+        theta0 = theta
+
+def calc_theta_r(theta_i, n1, n2):
+    theta_r = np.arcsin(n1 / n2 * np.sin(theta_i))
+    return theta_r
+
+
