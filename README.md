@@ -24,4 +24,5 @@
 
 
 * GOA model
-  ![image-20210426155714995](pic/GOA.png)
+  
+  <img src="pic/GOA.png" width = "800" height = "400"/>
