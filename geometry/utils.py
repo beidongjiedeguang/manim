@@ -106,40 +106,36 @@ def get_refraction_direction(direction, normal, n_from, n_to, p=0):
 def get_theta_def(theta_i, theta_r, p):
     return 2* p * theta_r - 2 * theta_i - (p-1)*PI
 
+def theta_def_to_sca(theta_def):
+    """本函数已正确实施"""
+    kp = int((PI - theta_def )/ (2*PI))
+    var = theta_def %(2*PI)
+    if abs(var) < PI:
+        q = 1
+    else:
+        q = -1
+    theta_sca = (theta_def + 2 * np.pi * kp )/q
+    return theta_sca, q
 
-def add_in_rays(obj, point1, point2, color=GREEN):
-    ray = Arrow(point1, point2, buff=0)
+
+def add_in_rays(obj, point1, point2, color=GREEN, run_time=0.02):
+    ray = Arrow(point1, point2, buff=0, thickness=0.01)
     ray.set_color(color)
-    obj.play(ShowCreation(ray), run_time=0.2)
+    ray.set_opacity(0.2)
+    obj.play(ShowCreation(ray), run_time=run_time)
 
 
-def add_out_rays(obj, theta_def, point1, color=None):
-    dx = 1 if abs(theta_def) < PI / 2 else -1
-    dy = np.tan(theta_def) / dx
+def add_out_rays(obj, theta_def, point1, color=None, run_time=0.02):
+    theta_sca, q = theta_def_to_sca(theta_def)
+    dx = 1 if theta_sca < PI/2 else -1 # 散射角小于90°，右半部出射，大于90°左半部出射
+    dy = abs(np.tan(theta_sca)) * q # q =1 表示上半部出射， -1表示下半部出射
+
     norm_vec = normalize(np.array([dx, dy, 0]))
     point_out = point1 + 3 * norm_vec
     ray = Arrow(point1, point_out, buff=0, thickness=0.01)
     ray.set_color(color)
-    obj.play(ShowCreation(ray), run_time=0.1)
+    obj.play(ShowCreation(ray), run_time=run_time)
 
-def add_all_rays(obj, point1, theta_i, theta_r, theta0, particle, pn,
-                 show_in_rays=True, show_out_rays=True,
-                 color_in=None, color_out=None):
-    for p in range(pn):
-        theta_def = get_theta_def(theta_i, theta_r, p)
-        print(theta_def, np.tan(theta_def))
-
-        if show_out_rays:
-            add_out_rays(obj, theta_def, point1, color=color_out)
-
-        theta = theta0 - (PI - 2 * theta_r)
-        point2 = particle.get_point_from_function(theta)
-
-        if show_in_rays:
-            add_in_rays(obj, point1, point2, color=color_in)
-
-        point1 = point2
-        theta0 = theta
 
 def calc_theta_r(theta_i, n1, n2):
     theta_r = np.arcsin(n1 / n2 * np.sin(theta_i))
