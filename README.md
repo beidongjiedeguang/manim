@@ -20,4 +20,8 @@
   
 * 3B1B videos:  
   https://github.com/3b1b/videos
-  
+
+
+
+* GOA model
+  ![image-20210426155714995](pic/GOA.png)
