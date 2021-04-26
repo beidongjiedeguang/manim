@@ -4,12 +4,34 @@ from geometry.utils import *
 class Particle(Scene):
 
     def construct(self):
+
         origin, R = ORIGIN, 2
         particle = circ(origin, R)
         self.play(ShowCreation(particle))
 
-        for theta in np.linspace(PI/2, PI-1e-3, 60):
+        for theta in np.linspace(PI/2, PI/1.4, 30):
             self.add_rays(theta, particle, 3)
+
+
+        axes = ThreeDAxes()
+        frame = self.camera.frame
+        self.play(ShowCreation(axes))
+        self.play(frame.animate.increment_theta(-30*DEGREES),
+                  frame.animate.increment_phi(70 * DEGREES),
+                  run_time = 1)
+
+        # frame.set_euler_angles(
+        #     theta=-30 * DEGREES,
+        #     phi=70 * DEGREES,
+        # )
+
+        self.play(
+            frame.animate.increment_phi(-10 * DEGREES),
+            frame.animate.increment_theta(-20 * DEGREES),
+            run_time=2
+        )
+
+
 
     def add_rays(self, theta1, particle, p=3):
         point1 = particle.get_point_from_function(theta1)
