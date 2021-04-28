@@ -1,3 +1,8 @@
+* 中文维基  
+  https://manim.wiki/  
+  https://manim.wiki/shaders/
+
+
 * Update manim:
 
   * linux:
