@@ -12,7 +12,6 @@ class Particle(Scene):
         for theta in np.linspace(PI/2, PI/1.4, 30):
             self.add_rays(theta, particle, 3)
 
-
         axes = ThreeDAxes()
         frame = self.camera.frame
         self.play(ShowCreation(axes))
@@ -31,15 +30,13 @@ class Particle(Scene):
             run_time=2
         )
 
-
-
     def add_rays(self, theta1, particle, p=3):
         point1 = particle.get_point_from_function(theta1)
         point0 = np.array([-10, point1[1], point1[2]])
 
         ray1 = Arrow(point0, point1,buff=0, thickness=0.01)
         ray1.set_opacity(0.1)
-        self.play(ShowCreation(ray1, run_time=0.1))
+        self.play(GrowArrow(ray1, run_time=0.3))
 
         theta_i = PI - theta1
         theta_r = calc_theta_r(theta_i, 1, 1.33)
@@ -55,13 +52,13 @@ class Particle(Scene):
             theta_def = get_theta_def(theta_i, theta_r, p)
 
             if show_out_rays:
-                add_out_rays(self, theta_def, point1, color=color_out, run_time=0.02)
+                add_out_rays(self, theta_def, point1, color=color_out, run_time=0.05)
 
             theta = theta0 - (PI - 2 * theta_r)
             point2 = particle.get_point_from_function(theta)
 
             if show_in_rays:
-                add_in_rays(self, point1, point2, color=color_in, run_time=0.02)
+                add_in_rays(self, point1, point2, color=color_in, run_time=0.05)
 
             point1 = point2
             theta0 = theta

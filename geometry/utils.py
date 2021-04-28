@@ -122,7 +122,7 @@ def add_in_rays(obj, point1, point2, color=GREEN, run_time=0.02):
     ray = Arrow(point1, point2, buff=0, thickness=0.01)
     ray.set_color(color)
     ray.set_opacity(0.2)
-    obj.play(ShowCreation(ray), run_time=run_time)
+    obj.play(GrowArrow(ray), run_time=run_time)
 
 
 def add_out_rays(obj, theta_def, point1, color=None, run_time=0.02):
@@ -134,7 +134,7 @@ def add_out_rays(obj, theta_def, point1, color=None, run_time=0.02):
     point_out = point1 + 3 * norm_vec
     ray = Arrow(point1, point_out, buff=0, thickness=0.01)
     ray.set_color(color)
-    obj.play(ShowCreation(ray), run_time=run_time)
+    obj.play(GrowArrow(ray), run_time=run_time)
 
 
 def calc_theta_r(theta_i, n1, n2):
