@@ -1,15 +1,15 @@
 from manim_imports_ext import *
 from geometry.utils import *
 
-class Particle(Scene):
+class ParticleMultiRay(Scene):
 
     def construct(self):
 
-        origin, R = ORIGIN, 2
+        origin, R = ORIGIN, 1.2
         particle = circ(origin, R)
         self.play(ShowCreation(particle))
 
-        for theta in np.linspace(PI/2, PI/1.4, 30):
+        for theta in np.linspace(PI/2, PI/1.2, 30):
             self.add_rays(theta, particle, 3)
 
         axes = ThreeDAxes()
@@ -32,33 +32,113 @@ class Particle(Scene):
 
     def add_rays(self, theta1, particle, p=3):
         point1 = particle.get_point_from_function(theta1)
-        point0 = np.array([-10, point1[1], point1[2]])
+        point0 = np.array([-5, point1[1], point1[2]])
 
-        ray1 = Arrow(point0, point1,buff=0, thickness=0.01)
-        ray1.set_opacity(0.1)
+        ray1 = Arrow(point0, point1,buff=0, thickness=0.001)
+        # ray1.set_opacity(0.1)
+        ray1.set_color(WHITE)
         self.play(GrowArrow(ray1, run_time=0.3))
 
         theta_i = PI - theta1
         theta_r = calc_theta_r(theta_i, 1, 1.33)
 
-        self.add_in_out_rays(point1, theta_i, theta_r, theta1, particle, pn=p,
+        add_in_out_rays(self, point1, theta_i, theta_r, theta1, particle, pn=p,
                      show_in_rays=True, show_out_rays=True,
                      color_out=GREEN)
 
-    def add_in_out_rays(self, point1, theta_i, theta_r, theta0, particle, pn,
-                     show_in_rays=True, show_out_rays=True,
-                     color_in=None, color_out=None):
-        for p in range(pn):
-            theta_def = get_theta_def(theta_i, theta_r, p)
+def add_in_out_rays(obj, point1, theta_i, theta_r, theta0, particle, pn,
+                 show_in_rays=True, show_out_rays=True,
+                 color_in=None, color_out=None):
+    rays = []
+    for p in range(pn):
+        # theta_def = get_theta_def(theta_i, theta_r, p)
+        if show_out_rays:
+            out_ray, title = add_out_rays_title(theta_i, theta_r, p, point1, color=color_out)
+            rays.append(out_ray)
 
-            if show_out_rays:
-                add_out_rays(self, theta_def, point1, color=color_out, run_time=0.05)
+        theta = theta0 - (PI - 2 * theta_r)
+        point2 = particle.get_point_from_function(theta)
 
-            theta = theta0 - (PI - 2 * theta_r)
-            point2 = particle.get_point_from_function(theta)
+        if show_in_rays:
+            in_ray = add_in_rays(point1, point2, color=color_in)
+            rays.append(in_ray)
 
-            if show_in_rays:
-                add_in_rays(self, point1, point2, color=color_in, run_time=0.05)
+        point1 = point2
+        theta0 = theta
 
-            point1 = point2
-            theta0 = theta
+    obj.play(*[GrowArrow(i) for i in rays], run_time=0.2)
+
+
+class ParticleSimgleRay(Scene):
+
+    def construct(self):
+
+        origin, R = np.array([0, 0, 0]), 1.2
+        particle = circ(origin, R)
+        self.play(ShowCreation(particle))
+
+        for theta in np.linspace(PI/1.2, PI/1.2, 1):
+            self.add_rays(theta, particle, p=3)
+
+        axes = ThreeDAxes()
+        frame = self.camera.frame
+        # self.play(ShowCreation(axes))
+        # self.play(frame.animate.increment_theta(-30*DEGREES),
+        #           frame.animate.increment_phi(70 * DEGREES),
+        #           run_time = 1)
+        #
+        #
+        # self.play(
+        #     frame.animate.increment_phi(-10 * DEGREES),
+        #     frame.animate.increment_theta(-20 * DEGREES),
+        #     run_time=2
+        # )
+
+    def add_rays(self, theta1, particle, p=3):
+        point1 = particle.get_point_from_function(theta1)
+        point0 = np.array([-5, point1[1], point1[2]])
+
+        ray1 = Arrow(point0, point1,buff=0, thickness=0.01)
+        ray1.set_opacity(1)
+        ray1.set_color(GREEN)
+        self.play(GrowArrow(ray1, run_time=0.3))
+
+        theta_i = PI - theta1
+        theta_r = calc_theta_r(theta_i, 1, 1.33)
+
+        add_ray(self, point1, theta_i, theta_r, theta1, particle,
+                pn=p,
+                show_in_rays=True, show_out_rays=True,
+                color_out=GREEN)
+
+def add_ray(obj, point1, theta_i, theta_r, theta0, particle, pn,
+                    show_in_rays=True, show_out_rays=True, show_text=True,
+                    run_time = 0.4,
+                    color_in=None, color_out=None):
+
+    for p in range(pn):
+        rays = []
+
+        if show_out_rays:
+            out_ray, title = add_out_rays_title(theta_i, theta_r, p, point1, color=color_out, show_text=show_text)
+            rays.append(out_ray)
+            obj.play(GrowArrow(out_ray), run_time=run_time)
+            if show_out_rays and show_text:
+                obj.play(ShowCreation(title))
+
+        theta = theta0 - (PI - 2 * theta_r)
+        point2 = particle.get_point_from_function(theta)
+
+        if show_in_rays:
+            in_ray = add_in_rays(point1, point2, color=color_in)
+            if p != pn-1:
+                rays.append(in_ray)
+                obj.play(GrowArrow(in_ray), run_time=run_time)
+
+        point1 = point2
+        theta0 = theta
+
+
+if __name__ == "__main__":
+    os.system("manim-render particle.py ParticleMultiRay -f")
+    # os.system("manim-render particle.py ParticleSimgleRay -f")

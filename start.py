@@ -117,3 +117,7 @@ class AnimatingMethods(Scene):
             run_time=5,
         )
         self.wait()
+
+if __name__ == "__main__":
+    os.system("manimgl start.py SquareToCircle -f")
+    # os.system("manimgl start.py AnimatingMethods -f")

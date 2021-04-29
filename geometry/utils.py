@@ -118,23 +118,28 @@ def theta_def_to_sca(theta_def):
     return theta_sca, q
 
 
-def add_in_rays(obj, point1, point2, color=GREEN, run_time=0.02):
+def add_in_rays(point1, point2, color=GREEN):
     ray = Arrow(point1, point2, buff=0, thickness=0.01)
     ray.set_color(color)
     ray.set_opacity(0.2)
-    obj.play(GrowArrow(ray), run_time=run_time)
+    return ray
 
 
-def add_out_rays(obj, theta_def, point1, color=None, run_time=0.02):
+def add_out_rays_title(theta_i, theta_r, p, point1, color=None, show_text=True):
+    theta_def = get_theta_def(theta_i, theta_r, p)
     theta_sca, q = theta_def_to_sca(theta_def)
     dx = 1 if theta_sca < PI/2 else -1 # 散射角小于90°，右半部出射，大于90°左半部出射
     dy = abs(np.tan(theta_sca)) * q # q =1 表示上半部出射， -1表示下半部出射
 
     norm_vec = normalize(np.array([dx, dy, 0]))
-    point_out = point1 + 3 * norm_vec
-    ray = Arrow(point1, point_out, buff=0, thickness=0.01)
+    point_out = point1 + 1.6 * norm_vec
+    ray = Arrow(point1, point_out, buff=0, thickness=0.02)
     ray.set_color(color)
-    obj.play(GrowArrow(ray), run_time=run_time)
+
+    if show_text:
+        title = Tex(f"p={p}").scale(0.7).move_to(point1 + 2 * norm_vec)
+
+    return ray, title
 
 
 def calc_theta_r(theta_i, n1, n2):

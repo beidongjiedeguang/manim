@@ -18,9 +18,13 @@ directories:
   temporary_storage: ""
 universal_import_line: "from manim_imports_ext import *"
 tex:
-   executable: "xelatex -no-pdf"
-   template_file: "ctex_template.tex"
-   intermediate_filetype: "xdv"
+#  executable: "latex"
+#  template_file: "tex_template.tex"
+#  intermediate_filetype: "dvi"
+  text_to_replace: "[tex_expression]"
+  executable: "xelatex -no-pdf"
+  template_file: "ctex_template.tex"
+  intermediate_filetype: "xdv"
 
 style:
   font: "Consolas"
