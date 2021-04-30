@@ -29,5 +29,4 @@
 
 
 * GOA model
-  
-  <img src="pic/GOA.png" width = "800" height = "400"/>
+  <img src="pic/GOA.PNG" width = "800" height = "400"/>
