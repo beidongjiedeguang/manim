@@ -3,9 +3,9 @@ from manim_imports_ext import *
 class TextExample(Scene):
 
     def construct(self):
-        title = TexText("This is some \\LaTeX")
+        # title = TexText("This is some \\LaTeX")
         # title = TexText("Differential\\\\equations", font_size=60)
-        # title = TexText("But what\\\\is $e^{M}$?")
+        title = TexText("But what\\\\is $e^{M}$?")
         basel = Tex(
             "\\sum_{n=1}^\\infty "
             "\\frac{1}{n^2} = \\frac{\\pi^2}{6}"
