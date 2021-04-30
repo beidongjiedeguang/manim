@@ -21,7 +21,7 @@ tex:
 #  executable: "latex"
 #  template_file: "tex_template.tex"
 #  intermediate_filetype: "dvi"
-  text_to_replace: "[tex_expression]"
+#  text_to_replace: "[tex_expression]"
   executable: "xelatex -no-pdf"
   template_file: "ctex_template.tex"
   intermediate_filetype: "xdv"

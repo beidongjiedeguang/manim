@@ -5,7 +5,12 @@ class TextExample(Scene):
     def construct(self):
         # title = TexText("This is some \\LaTeX")
         # title = TexText("Differential\\\\equations", font_size=60)
-        title = TexText("But what\\\\is $e^{M}$?")
+
+        a = 101010
+
+        title = TexText(f"But what\\\\is $e^{{M}}$? 并且可以输入在中文哦！" +
+                        f"\\\\ var a is {a}")
+
         basel = Tex(
             "\\sum_{n=1}^\\infty "
             "\\frac{1}{n^2} = \\frac{\\pi^2}{6}"
@@ -18,5 +23,6 @@ class TextExample(Scene):
         self.wait()
 
 if __name__ == "__main__":
-    os.system("manimgl start.py -f")
+    os.system("pwd")
+    os.system("manimgl start.py")
 
