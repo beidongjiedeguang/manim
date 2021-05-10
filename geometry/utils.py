@@ -55,7 +55,6 @@ def circ(origin, r):
     )
     return circle
 
-
 def get_circ_normal(point, origin):
     '''3d inputs'''
     print(point, origin, 'point and origin')

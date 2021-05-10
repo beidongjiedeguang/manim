@@ -4,13 +4,28 @@ from geometry.utils import *
 class ParticleMultiRay(Scene):
 
     def construct(self):
-
         origin, R = ORIGIN, 1.2
         particle = circ(origin, R)
+
+        TEXT = Text("亚平你好~ ")
+        TEXT.scale(0.2)
+        TEXT.set_color(BLUE)
+        TEXT.shift([-2, 2, 0])
+        self.play(ShowCreation(TEXT))
+
         self.play(ShowCreation(particle))
 
-        for theta in np.linspace(PI/2, PI/1.2, 30):
-            self.add_rays(theta, particle, 3)
+        def thetai2thetaPoint(theta_i):
+            return PI - theta_i
+
+        # theta_i1 = 30 * np.pi/180
+        # self.add_rays(thetai2thetaPoint(theta_i1), particle, 2, 0.75)
+        # self.add_rays(thetai2thetaPoint(45 * np.pi/180), particle, 2, 0.75)
+
+        for theta in np.linspace(thetai2thetaPoint(PI/2), thetai2thetaPoint(PI/5), 20):
+            self.add_rays(theta, particle, 6, 1.33)
+
+
 
         axes = ThreeDAxes()
         frame = self.camera.frame
@@ -30,8 +45,9 @@ class ParticleMultiRay(Scene):
             run_time=2
         )
 
-    def add_rays(self, theta1, particle, p=3):
+    def add_rays(self, theta1, particle, p=3, rm=1.33):
         point1 = particle.get_point_from_function(theta1)
+        print(point1)
         point0 = np.array([-5, point1[1], point1[2]])
 
         ray1 = Arrow(point0, point1,buff=0, thickness=0.001)
@@ -40,7 +56,7 @@ class ParticleMultiRay(Scene):
         self.play(GrowArrow(ray1, run_time=0.3))
 
         theta_i = PI - theta1
-        theta_r = calc_theta_r(theta_i, 1, 1.33)
+        theta_r = calc_theta_r(theta_i, 1, rm)
 
         add_in_out_rays(self, point1, theta_i, theta_r, theta1, particle, pn=p,
                      show_in_rays=True, show_out_rays=True,
