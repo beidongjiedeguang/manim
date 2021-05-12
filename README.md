@@ -27,6 +27,7 @@
   https://github.com/3b1b/videos
 
 
-
+* 请运行示例在根目录下，即manim_ky/目录
+  
 * GOA model
   <img src="pic/GOA.PNG" width = "900"/>

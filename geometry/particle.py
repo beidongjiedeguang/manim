@@ -157,21 +157,5 @@ def add_ray(obj, point1, theta_i, theta_r, theta0, particle, pn,
 
 if __name__ == "__main__":
     os.system("manim-render particle.py ParticleMultiRay -f") # -ow 保存
-    # import manimlib
-    # import manimlib.config
-    # import manimlib.extract_scene
-    # import manimlib.utils.init_config
-    #
-    # args = manimlib.config.parse_cli()
-    # print(args)
-    #
-    # if args.config:
-    #     manimlib.utils.init_config.init_customization()
-    #
-    # else:
-    #     config = manimlib.config.get_configuration(args)
-    #     scenes = manimlib.extract_scene.main(config)
-    #
-    #     for scene in scenes:
-    #         scene.run()
+
     # os.system("manim-render particle.py ParticleSimgleRay -f")
