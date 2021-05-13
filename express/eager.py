@@ -15,14 +15,9 @@ class EagerModeScene(Scene):
         self.tear_down()
 
     def embed(self):
-        self.embed()
+        super().embed()
 
-    def quit(self):
-        self.quit_interaction =True
-        self.window.is_closing = True
-        self.quit()
-        self.window.destroy()
-        self.unlock_mobject_data()
+
 
 class JupyterModeScene(EagerModeScene):
     def __init__(self):
@@ -34,5 +29,6 @@ class JupyterModeScene(EagerModeScene):
     def embed(self):
         pass
 
-    def quit(self):
+    @staticmethod
+    def quit():
         exit()

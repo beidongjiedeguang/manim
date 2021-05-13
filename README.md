@@ -30,4 +30,4 @@
 * 请运行示例在根目录下，即manim_ky/目录
   
 * GOA model
-  <img src="pic/GOA.PNG" width = "900"/>
+  <img src="data/pic/GOA.PNG" width = "900"/>
