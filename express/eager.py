@@ -1,5 +1,7 @@
-from manimlib import *
+from manimlib import Scene
 import time
+import sys
+import os
 
 class EagerModeScene(Scene):
 
@@ -29,6 +31,16 @@ class JupyterModeScene(EagerModeScene):
     def embed(self):
         pass
 
-    @staticmethod
-    def quit():
-        exit()
+    def quit(self) :
+        self.quit_interaction = True
+        self.unlock_mobject_data()
+        self.window.destroy()
+
+
+
+
+
+
+
+
+__all__ = ["EagerModeScene", "JupyterModeScene"]
