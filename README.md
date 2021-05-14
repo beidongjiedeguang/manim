@@ -27,7 +27,7 @@
   https://github.com/3b1b/videos
 
 
-* 请运行示例在根目录下，即manim_ky/目录
+* 请运行示例在根目录下，即本README.md所在目录。
   
 * GOA model
   <img src="data/pic/GOA.PNG" width = "900"/>
