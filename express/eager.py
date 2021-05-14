@@ -3,6 +3,8 @@ import time
 import sys
 import os
 
+__all__ = ["EagerModeScene", "JupyterModeScene"]
+
 class EagerModeScene(Scene):
 
     def __init__(self):
@@ -20,21 +22,21 @@ class EagerModeScene(Scene):
         super().embed()
 
 
-
 class JupyterModeScene(EagerModeScene):
     def __init__(self):
         super().__init__()
 
     def hold_on(self):
+        """We don't need it in jupyter lab/notebook."""
         pass
 
     def embed(self):
+        """We don't need it in jupyter lab/notebook."""
         pass
 
     def quit(self) :
-        self.quit_interaction = True
-        self.unlock_mobject_data()
-        self.window.destroy()
+        """Please use exit() or quit() in jupyter cell."""
+        pass
 
 
 
@@ -43,4 +45,6 @@ class JupyterModeScene(EagerModeScene):
 
 
 
-__all__ = ["EagerModeScene", "JupyterModeScene"]
+
+
+
