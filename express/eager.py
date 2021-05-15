@@ -63,7 +63,7 @@ class EagerModeScene(Scene):
         #     np.random.seed(self.random_seed)
 
         # -------------------------------------------
-        print(self.__dict__)
+
         self.virtual_animation_start_time = 0
         self.real_animation_start_time = time.time()
         self.file_writer.begin()
@@ -94,7 +94,6 @@ class EagerModeScene(Scene):
         self.file_writer_config['write_to_movie'] = True
         self.file_writer_config['movie_file_extension'] = '.gif'
 
-        print(self.file_writer_config)
         self.file_writer = SceneFileWriter(self, **self.file_writer_config)
         self.file_writer.begin()
 
