@@ -83,17 +83,19 @@ class CoordinateSystemExample(Scene):
         # that as we move the axes around it respects the coordinate
         # system defined by them.
         f_always(dot.move_to, lambda: axes.c2p(1, 1))
-        self.play(
-            axes.animate.scale(0.75),
-            axes.animate.to_corner(UL),
-            run_time=2,
-        )
-        self.wait()
-        self.play(FadeOut(VGroup(axes, dot, h_line, v_line)))
+
+        # self.play(
+        #     axes.animate.scale(0.75),
+        #     axes.animate.to_corner(UL),
+        #     run_time=2,
+        # )
+        # self.wait()
+        # self.play(FadeOut(VGroup(axes, dot, h_line, v_line)))
 
         # Other coordinate systems you can play around with include
         # ThreeDAxes, NumberPlane, and ComplexPlane.
-
+if __name__ == "__main__":
+    os.system("manim-render start.py  CoordinateSystemExample -f")  # -ow 保存
 
 class BraceAnnotation(Scene):
     def construct(self):

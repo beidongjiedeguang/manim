@@ -25,8 +25,6 @@ class ParticleMultiRay(Scene):
         for theta in np.linspace(thetai2thetaPoint(PI/2), thetai2thetaPoint(PI/5), 20):
             self.add_rays(theta, particle, 3, 1.33)
 
-
-
         axes = ThreeDAxes()
         frame = self.camera.frame
         self.play(ShowCreation(axes))
