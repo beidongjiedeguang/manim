@@ -1,4 +1,4 @@
-from express import EagerModeScene
+from manim_express import EagerModeScene
 from manimlib import *
 
 class CustomSurface:

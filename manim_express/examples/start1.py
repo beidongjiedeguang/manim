@@ -1,6 +1,6 @@
-from express import EagerModeScene
+from manim_express import EagerModeScene
 from manimlib import *
-from express.utils import m_line, m_scatter
+from manim_express.utils import m_line, m_scatter
 
 scene = EagerModeScene()
 
