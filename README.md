@@ -7,7 +7,7 @@
 
   * linux:
     ```bash
-    ./update_manim.sh
+    ./update_manim.py
     ```
     
   * windows:
