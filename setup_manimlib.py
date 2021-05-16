@@ -1,15 +1,8 @@
 #!/usr/bin/env python
-
 from __future__ import print_function
 from setuptools import setup, find_packages
 from glob import glob
-# import guang as my_package
-class my_package:
-    pass
-
-
-my_package.__name__ = 'manimlib'
-my_package.__version__ = 0
+import manimlib as my_package
 
 with open(glob('requirements.*')[0], encoding='utf-8') as f:
     all_reqs = f.read().split('\n')
@@ -26,12 +19,12 @@ setup(name=my_package.__name__,
               'shaders/**/*'
           ],
       },
-      description=" ML/DL tools function library",
+      description="Math Animation Tool(Fork from 3b1b manim)",
       long_description=long_description,
       long_description_content_type="text/markdown",
-      author="K.y",
+      authors="kunyuan",
       author_email="beidongjiedeguang@gmail.com",
-      url="https://github.com/beidongjiedeguang/mainm_express",
+      url="https://github.com/beidongjiedeguang/manim",
       license="MIT",
       install_requires=install_requires,
       classifiers=[
@@ -40,13 +33,11 @@ setup(name=my_package.__name__,
           'Intended Audience :: Science/Research',
           'Topic :: Scientific/Engineering :: Artificial Intelligence',
           "Programming Language :: Python :: 3",
-          "Programming Language :: Python :: 3.5",
-          "Programming Language :: Python :: 3.6",
-          "Programming Language :: Python :: 3.7",
+          "Programming Language :: Python :: 3.8",
       ],
       keywords=[
-          'Deep Learning', 'Machine Learning', 'Neural Networks',
-          'Natural Language Processing', 'Computer Vision'
+          'Computer Vision', 'Machine Learning', 'Neural Networks',
+          'Mathematic'
       ],
       entry_points={'console_scripts': [
           'manimgl = manimlib.__main__:main',
@@ -54,7 +45,3 @@ setup(name=my_package.__name__,
       ]},
       packages=find_packages())
 
-# setup(
-#     setup_requires=['pbr'],
-#     pbr=True,
-# )
