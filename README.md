@@ -12,7 +12,7 @@
     
   * windows:
     ```bash
-    git checkout master setup.py setup.cfg requirements.txt
+    git checkout master setup_manimlib.py setup.cfg requirements.txt
     pip install -e .
     # windows poershell:
     rm setup.*

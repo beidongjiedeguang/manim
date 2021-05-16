@@ -1,3 +1,2 @@
-git checkout master setup.py setup.cfg requirements.txt
-pip install -e .
-rm -rf setup.* requirements.txt .eggs/
+pip uninstall manimlib -y && python setup_manimlib.py install
+pip uninstall manim_express -y && python setup_express.py install
