@@ -10,6 +10,16 @@ from screeninfo import get_monitors
 from manimlib.utils.config_ops import merge_dicts_recursively
 from manimlib.utils.init_config import init_customization
 
+from enum import IntEnum
+
+
+class Size(IntEnum):
+    small = 1
+    medium = 2
+    big = 3
+    bigger = 4
+    biggest = 5
+
 
 def parse_cli():
     try:
@@ -175,7 +185,7 @@ def get_custom_config():
     else:
         with open(filename, "r") as file:
             config = yaml.safe_load(file)
-    
+
     return config
 
 
@@ -238,8 +248,20 @@ def get_configuration(args):
     mon_index = custom_config["window_monitor"]
     monitor = monitors[min(mon_index, len(monitors) - 1)]
     window_width = monitor.width
-    if not args.full_screen:
+
+    if args.screen_size == Size.biggest or args.full_screen:
+        pass
+    elif args.screen_size == Size.small:
+        window_width //= 3
+    elif args.screen_size == Size.medium:
         window_width //= 2
+    elif args.screen_size == Size.big:
+        window_width = int(window_width / 1.5)
+    elif args.screen_size == Size.bigger:
+        window_width = int(window_width / 1.25)
+    else:
+        raise ValueError('Invalid screen_size parameter.')
+
     window_height = window_width * 9 // 16
     config["window_config"] = {
         "size": (window_width, window_height),
