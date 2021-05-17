@@ -1,5 +1,6 @@
 .idea/
 
+workflow.py
 # For manim
 videos
 #/custom_config.yml
