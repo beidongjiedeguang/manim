@@ -249,18 +249,24 @@ def get_configuration(args):
     monitor = monitors[min(mon_index, len(monitors) - 1)]
     window_width = monitor.width
 
-    if args.screen_size == Size.biggest or args.full_screen:
+    if args.full_screen:
         pass
-    elif args.screen_size == Size.small:
-        window_width //= 3
-    elif args.screen_size == Size.medium:
-        window_width //= 2
-    elif args.screen_size == Size.big:
-        window_width = int(window_width / 1.5)
-    elif args.screen_size == Size.bigger:
-        window_width = int(window_width / 1.25)
     else:
-        raise ValueError('Invalid screen_size parameter.')
+        try:
+            if args.screen_size == Size.biggest:
+                pass
+            elif args.screen_size == Size.small:
+                window_width //= 3
+            elif args.screen_size == Size.medium:
+                window_width //= 2
+            elif args.screen_size == Size.big:
+                window_width = int(window_width / 1.5)
+            elif args.screen_size == Size.bigger:
+                window_width = int(window_width / 1.25)
+            else:
+                raise ValueError('Invalid screen_size parameter.')
+        except:
+            pass
 
     window_height = window_width * 9 // 16
     config["window_config"] = {
