@@ -245,7 +245,7 @@ class Arc(TipableVMobject):
 
     def get_start_angle(self):
         # Fixed dimension error
-        angle = angle_of_vector((self.get_start() - self.get_arc_center().reshape(3)))
+        angle = angle_of_vector(self.get_start() - self.get_arc_center().reshape(3))
         return angle % TAU
 
     def get_stop_angle(self):
