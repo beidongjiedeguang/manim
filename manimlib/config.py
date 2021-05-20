@@ -266,7 +266,7 @@ def get_configuration(args):
             else:
                 raise ValueError('Invalid screen_size parameter.')
         except:
-            pass
+            window_width //= 2
 
     window_height = window_width * 9 // 16
     config["window_config"] = {

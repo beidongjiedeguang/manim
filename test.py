@@ -1,5 +1,6 @@
 from manimlib import *
 
+
 class SquareToCircle(Scene):
     def construct(self):
         circle = Circle()
@@ -11,3 +12,8 @@ class SquareToCircle(Scene):
         self.wait()
         self.play(ReplacementTransform(square, circle))
         self.wait()
+
+
+if __name__ == "__main__":
+    import os
+    os.system('manimgl test.py -f')
