@@ -15,8 +15,10 @@ setup(name=my_package.__name__,
       version=my_package.__version__,
       package_data={
           'manimlib': [
-              '*.yaml', '*.yml',
-              'shaders/**/*'
+              '*.yaml',
+              '*.yml',
+              'shaders/**/*',
+              'tex_templates/*'
           ],
       },
       description="Math Animation Tool(Fork from 3b1b manim)",
