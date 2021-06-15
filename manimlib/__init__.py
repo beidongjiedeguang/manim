@@ -1,6 +1,6 @@
 from manimlib.constants import *
 __name__ = 'manim_kunyuan'
-__version__ = 0.20
+__version__ = 0.21
 from manimlib.animation.animation import *
 from manimlib.animation.composition import *
 from manimlib.animation.creation import *
