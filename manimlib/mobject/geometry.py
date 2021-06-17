@@ -249,7 +249,8 @@ class Arc(TipableVMobject):
         return find_intersection(a1, n1, a2, n2)
 
     def get_start_angle(self):
-        angle = angle_of_vector(self.get_start() - self.get_arc_center())
+        # Fixed dimension error
+        angle = angle_of_vector(self.get_start() - self.get_arc_center().reshape(3))
         return angle % TAU
 
     def get_stop_angle(self):
