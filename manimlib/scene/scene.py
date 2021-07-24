@@ -585,10 +585,8 @@ class Scene(object):
 
     def on_key_press(self, symbol, modifiers):
         try:
-            print(symbol)
             char = chr(symbol)
         except OverflowError:
-            print(symbol)
             print(" Warning: The value of the pressed key is too large.")
             return
 
