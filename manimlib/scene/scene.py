@@ -55,6 +55,7 @@ class Scene(object):
         self.time = 0
         self.skip_time = 0
         self.original_skipping_status = self.skip_animations
+        self.pause = 0
 
         # Items associated with interaction
         self.mouse_point = Point()
@@ -569,7 +570,7 @@ class Scene(object):
 
         frame = self.camera.frame
         if self.window.is_key_pressed(ord("z")):
-            factor = 1 + np.arctan(10 * offset[1])
+            factor = 1 + np.arctan(15 * offset[1])
             frame.scale(factor, about_point=point)
         else:
             transform = frame.get_inverse_camera_rotation_matrix()
@@ -584,8 +585,10 @@ class Scene(object):
 
     def on_key_press(self, symbol, modifiers):
         try:
+            print(symbol)
             char = chr(symbol)
         except OverflowError:
+            print(symbol)
             print(" Warning: The value of the pressed key is too large.")
             return
 
@@ -598,6 +601,11 @@ class Scene(object):
             self.camera.frame.to_default_state()
         elif char == "q":
             self.quit_interaction = True
+        elif char == " ":
+            duration = 0.1
+            self.pause = self.pause ^ 1
+            while self.pause == 1:
+                self.update_frame(duration)
 
     def on_resize(self, width: int, height: int):
         self.camera.reset_pixel_shape(width, height)
