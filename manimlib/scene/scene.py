@@ -56,6 +56,7 @@ class Scene(object):
         self.time = 0
         self.skip_time = 0
         self.original_skipping_status = self.skip_animations
+        self.pause = 0
 
         # Items associated with interaction
         self.mouse_point = Point()
@@ -176,6 +177,7 @@ class Scene(object):
     # Related to updating
     def update_mobjects(self, dt):
         for mobject in self.mobjects:
+            mobject: Mobject
             mobject.update(dt)
 
     def should_update_mobjects(self):
@@ -601,10 +603,42 @@ class Scene(object):
         if propagate_event is not None and propagate_event is False:
             return
 
-        if char == "r":
+        if symbol == key.R:
             self.camera.frame.to_default_state()
-        elif char == "q":
+
+        elif symbol in (key.Q, key.TAB):  # key.APOSTROPHE,
             self.quit_interaction = True
+
+        elif symbol == key.SPACE:
+            self.pause = self.pause ^ 1
+            time_pause_start = time.time()
+            if self.pause:
+                print("\nPausing animation...")
+            while self.pause == 1:
+                self.window: Window
+                self.window.swap_buffers()
+            time_delta = time.time() - time_pause_start
+            self.real_animation_start_time += time_delta
+
+        # play preview clip
+        elif symbol in (key.LEFT, key.COMMA, key.NUM_1, key._1):
+            self.current_clip -= 1
+            try:
+                self.replay(self.current_clip)
+            except IndexError:
+                pass
+
+        # play next clip
+        elif symbol in (key.RIGHT, key.PERIOD, key._3, key.NUM_3):
+            self.current_clip += 1
+            try:
+                self.replay(self.current_clip)
+            except IndexError:
+                self.current_clip -= 2
+
+        # play current clip
+        elif symbol in (key.NUM_DIVIDE, key.DOWN, key._2, key.NUM_2):
+            self.replay(self.current_clip)
 
     def on_resize(self, width: int, height: int):
         self.camera.reset_pixel_shape(width, height)
