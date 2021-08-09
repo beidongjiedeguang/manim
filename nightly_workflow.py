@@ -1,7 +1,8 @@
-import os
-from guang.Utils.toolsFunc import rm
+from sparrow.version_ops import VersionControl
 
-rm(['eggs', 'dist', 'build', 'manim_kunyuan.egg-info'])
-os.system('pip uninstall manim_kunyuan -y && python setup_manimlib.py install')
-
-rm(['eggs', 'dist', 'build', 'manim_kunyuan.egg-info'])
+pkgname = "manim_kunyuan"
+# vc = VersionControl(pkgname, "manimlib", version="0.27")
+vc = VersionControl(pkgname, "manimlib")
+# vc.update_version(1)
+vc.update_readme(license="")
+vc.install(pkgname)
