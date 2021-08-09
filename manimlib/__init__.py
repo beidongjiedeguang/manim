@@ -4,7 +4,7 @@ __version__ = pkg_resources.get_distribution("manimgl").version
 
 from manimlib.constants import *
 __name__ = 'manim_kunyuan'
-__version__ = 0.26
+__version__ = 0.27
 print(f"manimlib version: {__version__}")
 from manimlib.animation.animation import *
 from manimlib.animation.composition import *
