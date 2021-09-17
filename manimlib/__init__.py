@@ -3,9 +3,13 @@ import pkg_resources
 __version__ = pkg_resources.get_distribution("manimgl").version
 
 from manimlib.constants import *
-__name__ = 'manim_kunyuan'
-__version__ = 0.27
-print(f"manimlib version: {__version__}")
+from sparrow.file_ops import yaml_load, ppath
+from sparrow.color_str import rgb_string
+
+_version_config = yaml_load(ppath("version-config.yaml", __file__))
+__version__ = _version_config['version']
+print(f"{rgb_string(_version_config['name'], color='#C9E8FF')} version: {rgb_string(__version__, color='#34A853')}")
+
 from manimlib.animation.animation import *
 from manimlib.animation.composition import *
 from manimlib.animation.creation import *
