@@ -1,9 +1,9 @@
 import time
 
-from manimlib.constants import BLACK
-from manimlib.mobject.numbers import Integer
-from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.logger import log
+from ..constants import BLACK
+from ..mobject.numbers import Integer
+from ..mobject.types.vectorized_mobject import VGroup
+from ..logger import log
 
 
 def print_family(mobject, n_tabs=0):

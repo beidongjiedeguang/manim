@@ -1,18 +1,18 @@
 import numpy as np
 from pyglet.window import key as PygletWindowKeys
 
-from manimlib.constants import FRAME_HEIGHT, FRAME_WIDTH
-from manimlib.constants import LEFT, RIGHT, UP, DOWN, ORIGIN
-from manimlib.constants import SMALL_BUFF, MED_SMALL_BUFF, MED_LARGE_BUFF
-from manimlib.constants import BLACK, GREY_A, GREY_C, RED, GREEN, BLUE, WHITE
-from manimlib.mobject.mobject import Mobject, Group
-from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.mobject.geometry import Dot, Line, Square, Rectangle, RoundedRectangle, Circle
-from manimlib.mobject.svg.text_mobject import Text
-from manimlib.mobject.value_tracker import ValueTracker
-from manimlib.utils.config_ops import digest_config
-from manimlib.utils.space_ops import get_norm, get_closest_point_on_line
-from manimlib.utils.color import rgb_to_color, color_to_rgba, rgb_to_hex
+from ..constants import FRAME_HEIGHT, FRAME_WIDTH
+from ..constants import LEFT, RIGHT, UP, DOWN, ORIGIN
+from ..constants import SMALL_BUFF, MED_SMALL_BUFF, MED_LARGE_BUFF
+from ..constants import BLACK, GREY_A, GREY_C, RED, GREEN, BLUE, WHITE
+from ..mobject.mobject import Mobject, Group
+from ..mobject.types.vectorized_mobject import VGroup
+from ..mobject.geometry import Dot, Line, Square, Rectangle, RoundedRectangle, Circle
+from ..mobject.svg.text_mobject import Text
+from ..mobject.value_tracker import ValueTracker
+from ..utils.config_ops import digest_config
+from ..utils.space_ops import get_norm, get_closest_point_on_line
+from ..utils.color import rgb_to_color, color_to_rgba, rgb_to_hex
 
 
 # Interactive Mobjects

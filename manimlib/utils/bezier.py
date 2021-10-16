@@ -1,11 +1,11 @@
 from scipy import linalg
 import numpy as np
 
-from manimlib.utils.simple_functions import choose
-from manimlib.utils.space_ops import find_intersection
-from manimlib.utils.space_ops import cross2d
-from manimlib.utils.space_ops import midpoint
-from manimlib.logger import log
+from ..utils.simple_functions import choose
+from ..utils.space_ops import find_intersection
+from ..utils.space_ops import cross2d
+from ..utils.space_ops import midpoint
+from ..logger import log
 
 CLOSED_THRESHOLD = 0.001
 

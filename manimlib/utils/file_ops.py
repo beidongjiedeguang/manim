@@ -22,7 +22,7 @@ def find_file(file_name, directories=None, extensions=None):
     # it to a temporary directory
     if validators.url(file_name):
         import urllib.request
-        from manimlib.utils.directories import get_downloads_dir
+        from ..utils.directories import get_downloads_dir
         stem, name = os.path.split(file_name)
         folder = get_downloads_dir()
         path = os.path.join(folder, name)

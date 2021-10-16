@@ -1,7 +1,7 @@
-from manimlib.constants import *
-from manimlib.mobject.svg.tex_mobject import SingleStringTex
-from manimlib.mobject.svg.text_mobject import Text
-from manimlib.mobject.types.vectorized_mobject import VMobject
+from ..constants import *
+from ..mobject.svg.tex_mobject import SingleStringTex
+from ..mobject.svg.text_mobject import Text
+from ..mobject.types.vectorized_mobject import VMobject
 
 
 string_to_mob_map = {}

@@ -1,7 +1,7 @@
 import numpy as np
 
-from manimlib.mobject.mobject import Mobject
-from manimlib.utils.iterables import listify
+from ..mobject.mobject import Mobject
+from ..utils.iterables import listify
 
 
 class ValueTracker(Mobject):

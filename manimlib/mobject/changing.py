@@ -1,13 +1,13 @@
 import numpy as np
-from manimlib.constants import BLUE_D
-from manimlib.constants import BLUE_B
-from manimlib.constants import BLUE_E
-from manimlib.constants import GREY_BROWN
-from manimlib.constants import WHITE
-from manimlib.mobject.mobject import Mobject
-from manimlib.mobject.types.vectorized_mobject import VMobject
-from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.utils.rate_functions import smooth
+from ..constants import BLUE_D
+from ..constants import BLUE_B
+from ..constants import BLUE_E
+from ..constants import GREY_BROWN
+from ..constants import WHITE
+from ..mobject.mobject import Mobject
+from ..mobject.types.vectorized_mobject import VMobject
+from ..mobject.types.vectorized_mobject import VGroup
+from ..utils.rate_functions import smooth
 
 
 class AnimatedBoundary(VGroup):
