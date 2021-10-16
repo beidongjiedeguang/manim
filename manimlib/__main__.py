@@ -1,25 +1,25 @@
 #!/usr/bin/env python
-import manimlib.config
-import manimlib.logger
-import manimlib.extract_scene
-import manimlib.utils.init_config
+import manimlib
 from manimlib import __version__
+from .config import parse_cli, get_configuration
+from .extract_scene import main
+from .utils.init_config import init_customization
 
 
 def main():
     print(f"ManimGL \033[32mv{__version__}\033[0m")
+    args = parse_cli()
 
-    args = manimlib.config.parse_cli()
-    if args.version and args.file is None:
+    if args.version and args.file == None:
         return
     if args.log_level:
         manimlib.logger.log.setLevel(args.log_level)
 
     if args.config:
-        manimlib.utils.init_config.init_customization()
+        init_customization()
     else:
-        config = manimlib.config.get_configuration(args)
-        scenes = manimlib.extract_scene.main(config)
+        config = get_configuration(args)
+        scenes = main(config)
 
         for scene in scenes:
             scene.run()

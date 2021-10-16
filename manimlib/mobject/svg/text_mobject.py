@@ -14,13 +14,13 @@ from contextlib import contextmanager
 from pathlib import Path
 
 import manimpango
-from manimlib.constants import *
-from manimlib.mobject.geometry import Dot
-from manimlib.mobject.svg.svg_mobject import SVGMobject
-from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.utils.config_ops import digest_config
-from manimlib.utils.customization import get_customization
-from manimlib.utils.directories import get_downloads_dir, get_text_dir
+from ...constants import *
+from ...mobject.geometry import Dot
+from ...mobject.svg.svg_mobject import SVGMobject
+from ...mobject.types.vectorized_mobject import VGroup
+from ...utils.config_ops import digest_config
+from ...utils.customization import get_customization
+from ...utils.directories import get_downloads_dir, get_text_dir
 from manimpango import PangoUtils, TextSetting, MarkupUtils
 
 TEXT_MOB_SCALE_FACTOR = 0.0076

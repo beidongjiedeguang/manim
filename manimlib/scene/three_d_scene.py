@@ -1,4 +1,4 @@
-from manimlib.scene.scene import Scene
+from ..scene.scene import Scene
 
 
 class ThreeDScene(Scene):

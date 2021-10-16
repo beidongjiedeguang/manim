@@ -2,9 +2,9 @@ import inspect
 import sys
 import copy
 
-from manimlib.scene.scene import Scene
-from manimlib.config import get_custom_config
-from manimlib.logger import log
+from .scene.scene import Scene
+from .config import get_custom_config
+from .logger import log
 
 
 class BlankScene(Scene):

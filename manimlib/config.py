@@ -8,9 +8,9 @@ import yaml
 from contextlib import contextmanager
 from screeninfo import get_monitors
 
-from manimlib.utils.config_ops import merge_dicts_recursively
-from manimlib.utils.init_config import init_customization
-from manimlib.logger import log
+from .logger import log
+from .utils.config_ops import merge_dicts_recursively
+from .utils.init_config import init_customization
 
 from enum import IntEnum
 

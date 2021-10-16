@@ -2,15 +2,15 @@ from functools import reduce
 import operator as op
 import re
 
-from manimlib.constants import *
-from manimlib.mobject.geometry import Line
-from manimlib.mobject.svg.svg_mobject import SVGMobject
-from manimlib.mobject.types.vectorized_mobject import VMobject
-from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.utils.config_ops import digest_config
-from manimlib.utils.tex_file_writing import tex_to_svg_file
-from manimlib.utils.tex_file_writing import get_tex_config
-from manimlib.utils.tex_file_writing import display_during_execution
+from ...constants import *
+from ...mobject.geometry import Line
+from ...mobject.svg.svg_mobject import SVGMobject
+from ...mobject.types.vectorized_mobject import VMobject
+from ...mobject.types.vectorized_mobject import VGroup
+from ...utils.config_ops import digest_config
+from ...utils.tex_file_writing import tex_to_svg_file
+from ...utils.tex_file_writing import get_tex_config
+from ...utils.tex_file_writing import display_during_execution
 
 
 SCALE_FACTOR_PER_FONT_POINT = 0.001

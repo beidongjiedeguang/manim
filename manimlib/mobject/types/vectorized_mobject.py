@@ -4,29 +4,28 @@ import moderngl
 
 from functools import reduce, wraps
 
-from manimlib.constants import *
-from manimlib.mobject.mobject import Mobject
-from manimlib.mobject.mobject import Point
-from manimlib.utils.bezier import bezier
-from manimlib.utils.bezier import get_smooth_quadratic_bezier_handle_points
-from manimlib.utils.bezier import get_smooth_cubic_bezier_handle_points
-from manimlib.utils.bezier import get_quadratic_approximation_of_cubic
-from manimlib.utils.bezier import interpolate
-from manimlib.utils.bezier import inverse_interpolate
-from manimlib.utils.bezier import integer_interpolate
-from manimlib.utils.bezier import partial_quadratic_bezier_points
-from manimlib.utils.color import rgb_to_hex
-from manimlib.utils.iterables import make_even
-from manimlib.utils.iterables import resize_array
-from manimlib.utils.iterables import resize_with_interpolation
-from manimlib.utils.iterables import listify
-from manimlib.utils.space_ops import angle_between_vectors
-from manimlib.utils.space_ops import cross2d
-from manimlib.utils.space_ops import earclip_triangulation
-from manimlib.utils.space_ops import get_norm
-from manimlib.utils.space_ops import get_unit_normal
-from manimlib.utils.space_ops import z_to_vector
-from manimlib.shader_wrapper import ShaderWrapper
+from ...constants import *
+from ...mobject.mobject import Mobject
+from ...mobject.mobject import Point
+from ...utils.bezier import bezier
+from ...utils.bezier import get_smooth_quadratic_bezier_handle_points
+from ...utils.bezier import get_smooth_cubic_bezier_handle_points
+from ...utils.bezier import get_quadratic_approximation_of_cubic
+from ...utils.bezier import interpolate
+from ...utils.bezier import integer_interpolate
+from ...utils.bezier import partial_quadratic_bezier_points
+from ...utils.color import rgb_to_hex
+from ...utils.iterables import make_even
+from ...utils.iterables import resize_array
+from ...utils.iterables import resize_with_interpolation
+from ...utils.iterables import listify
+from ...utils.space_ops import angle_between_vectors
+from ...utils.space_ops import cross2d
+from ...utils.space_ops import earclip_triangulation
+from ...utils.space_ops import get_norm
+from ...utils.space_ops import get_unit_normal
+from ...utils.space_ops import z_to_vector
+from ...shader_wrapper import ShaderWrapper
 
 
 class VMobject(Mobject):
