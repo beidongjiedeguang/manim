@@ -1,7 +1,6 @@
 from functools import reduce
 import operator as op
 import re
-import itertools as it
 
 from ...constants import *
 from ...mobject.geometry import Line

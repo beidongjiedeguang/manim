@@ -2,27 +2,26 @@ import inspect
 import random
 import platform
 import itertools as it
-import logging
 from functools import wraps
 
 import streamlit as st
 from tqdm import tqdm as ProgressDisplay
 import numpy as np
 import time
+
 from ..animation.animation import prepare_animation
 from ..animation.transform import MoveToTarget
-from ..mobject.mobject import Point
 from ..camera.camera import Camera
 from ..constants import DEFAULT_WAIT_TIME
 from ..mobject.mobject import Mobject
+from ..mobject.mobject import Point
 from ..scene.scene_file_writer import SceneFileWriter
 from ..utils.config_ops import digest_config
 from ..utils.family_ops import extract_mobject_family_members
 from ..utils.family_ops import restructure_list_to_exclude_certain_family_members
 from ..event_handler.event_type import EventType
 from ..event_handler import EVENT_DISPATCHER
-from ..window import Window
-from pyglet.window import key
+from ..logger import log
 
 
 class Scene(object):
@@ -47,6 +46,7 @@ class Scene(object):
             from ..window import Window
             self.window = Window(scene=self, **self.window_config)
             self.camera_config["ctx"] = self.window.ctx
+            self.camera_config["frame_rate"] = 30  # Where's that 30 from?
         else:
             self.window = None
 
@@ -105,10 +105,12 @@ class Scene(object):
         # If there is a window, enter a loop
         # which updates the frame while under
         # the hood calling the pyglet event loop
+        log.info("Tips: You are now in the interactive mode. Now you can use the keyboard"
+            " and the mouse to interact with the scene. Just press `q` if you want to quit.")
         self.quit_interaction = False
         self.lock_static_mobject_data()
         while not (self.window.is_closing or self.quit_interaction):
-            self.update_frame()
+            self.update_frame(1 / self.camera.frame_rate)
         if self.window.is_closing:
             self.window.destroy()
         if self.quit_interaction:
@@ -123,6 +125,9 @@ class Scene(object):
         self.linger_after_completion = False
         self.update_frame()
 
+        # Save scene state at the point of embedding
+        self.save_state()
+
         from IPython.terminal.embed import InteractiveShellEmbed
         shell = InteractiveShellEmbed()
         # Have the frame update after each command
@@ -133,6 +138,8 @@ class Scene(object):
         local_ns["touch"] = self.interact
         for term in ("play", "wait", "add", "remove", "clear", "save_state", "restore"):
             local_ns[term] = getattr(self, term)
+        log.info("Tips: Now the embed iPython terminal is open. But you can't interact with"
+            " the window directly. To do so, you need to type `touch()` or `self.interact()`")
         shell(local_ns=local_ns, stack_depth=2)
         # End scene when exiting an embed.
         raise EndSceneEarlyException()
@@ -253,6 +260,18 @@ class Scene(object):
 
     def get_mobject_copies(self):
         return [m.copy() for m in self.mobjects]
+
+    def point_to_mobject(self, point, search_set=None, buff=0):
+        """
+        E.g. if clicking on the scene, this returns the top layer mobject
+        under a given point
+        """
+        if search_set is None:
+            search_set = self.mobjects
+        for mobject in reversed(search_set):
+            if mobject.is_point_touching(point, buff=buff):
+                return mobject
+        return None
 
     # Related to skipping
     def update_skipping_status(self):
@@ -468,10 +487,7 @@ class Scene(object):
     @handle_play_like_call
     def play(self, *args, **kwargs):
         if len(args) == 0:
-            logging.log(
-                logging.WARNING,
-                "Called Scene.play with no animations"
-            )
+            log.warning("Called Scene.play with no animations")
             return
         animations = self.anims_from_play_args(*args, **kwargs)
         self.lock_static_mobject_data(*animations)
@@ -618,7 +634,7 @@ class Scene(object):
         try:
             char = chr(symbol)
         except OverflowError:
-            print(" Warning: The value of the pressed key is too large.")
+            log.warning("The value of the pressed key is too large.")
             return
 
         event_data = {"symbol": symbol, "modifiers": modifiers}

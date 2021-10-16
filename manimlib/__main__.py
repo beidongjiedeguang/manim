@@ -1,11 +1,16 @@
 #!/usr/bin/env python
+from manimlib import __version__
 from .config import parse_cli, get_configuration
 from .extract_scene import main
 from .utils.init_config import init_customization
 
 
 def main():
+    print(f"ManimGL \033[32mv{__version__}\033[0m")
     args = parse_cli()
+
+    if args.version and args.file == None:
+        return
 
     if args.config:
         init_customization()
@@ -16,6 +21,5 @@ def main():
         for scene in scenes:
             scene.run()
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
