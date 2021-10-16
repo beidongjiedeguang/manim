@@ -5,4 +5,5 @@ pkgname = "manim_kunyuan"
 vc = VersionControl(pkgname, "manimlib")
 # vc.update_version(1)
 vc.update_readme(license="")
-vc.install(pkgname)
+# vc.install()
+vc.upload_pypi()
