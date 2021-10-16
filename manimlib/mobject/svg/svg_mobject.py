@@ -7,22 +7,22 @@ import hashlib
 
 from xml.dom import minidom
 
-from manimlib.constants import DEFAULT_STROKE_WIDTH
-from manimlib.constants import ORIGIN, UP, DOWN, LEFT, RIGHT
-from manimlib.constants import BLACK
-from manimlib.constants import WHITE
-from manimlib.constants import DEGREES, PI
+from ...constants import DEFAULT_STROKE_WIDTH
+from ...constants import ORIGIN, UP, DOWN, LEFT, RIGHT
+from ...constants import BLACK
+from ...constants import WHITE
+from ...constants import DEGREES, PI
 
-from manimlib.mobject.geometry import Circle
-from manimlib.mobject.geometry import Rectangle
-from manimlib.mobject.geometry import RoundedRectangle
-from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.mobject.types.vectorized_mobject import VMobject
-from manimlib.utils.color import *
-from manimlib.utils.config_ops import digest_config
-from manimlib.utils.directories import get_mobject_data_dir
-from manimlib.utils.images import get_full_vector_image_path
-from manimlib.utils.simple_functions import clip
+from ...mobject.geometry import Circle
+from ...mobject.geometry import Rectangle
+from ...mobject.geometry import RoundedRectangle
+from ...mobject.types.vectorized_mobject import VGroup
+from ...mobject.types.vectorized_mobject import VMobject
+from ...utils.color import *
+from ...utils.config_ops import digest_config
+from ...utils.directories import get_mobject_data_dir
+from ...utils.images import get_full_vector_image_path
+from ...utils.simple_functions import clip
 
 
 def string_to_numbers(num_string):

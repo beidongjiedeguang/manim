@@ -1,10 +1,10 @@
 import numpy as np
 import moderngl
 
-from manimlib.constants import GREY_C
-from manimlib.constants import ORIGIN
-from manimlib.mobject.types.point_cloud_mobject import PMobject
-from manimlib.utils.iterables import resize_preserving_order
+from ...constants import GREY_C
+from ...constants import ORIGIN
+from ...mobject.types.point_cloud_mobject import PMobject
+from ...utils.iterables import resize_preserving_order
 
 
 DEFAULT_DOT_RADIUS = 0.05

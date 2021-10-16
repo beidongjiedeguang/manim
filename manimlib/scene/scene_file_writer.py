@@ -6,12 +6,12 @@ import os
 import sys
 import platform
 
-from manimlib.constants import FFMPEG_BIN
-from manimlib.utils.config_ops import digest_config
-from manimlib.utils.file_ops import guarantee_existence
-from manimlib.utils.file_ops import add_extension_if_not_present
-from manimlib.utils.file_ops import get_sorted_integer_files
-from manimlib.utils.sounds import get_full_sound_file_path
+from ..constants import FFMPEG_BIN
+from ..utils.config_ops import digest_config
+from ..utils.file_ops import guarantee_existence
+from ..utils.file_ops import add_extension_if_not_present
+from ..utils.file_ops import get_sorted_integer_files
+from ..utils.sounds import get_full_sound_file_path
 
 
 class SceneFileWriter(object):

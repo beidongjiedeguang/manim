@@ -2,11 +2,11 @@ import numpy as np
 
 from PIL import Image
 
-from manimlib.constants import *
-from manimlib.mobject.mobject import Mobject
-from manimlib.utils.bezier import inverse_interpolate
-from manimlib.utils.images import get_full_raster_image_path
-from manimlib.utils.iterables import listify
+from ...constants import *
+from ...mobject.mobject import Mobject
+from ...utils.bezier import inverse_interpolate
+from ...utils.images import get_full_raster_image_path
+from ...utils.iterables import listify
 
 
 class ImageMobject(Mobject):

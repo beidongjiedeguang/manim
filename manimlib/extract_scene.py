@@ -2,8 +2,8 @@ import inspect
 import sys
 import logging
 
-from manimlib.scene.scene import Scene
-from manimlib.config import get_custom_config
+from .scene.scene import Scene
+from .config import get_custom_config
 
 
 class BlankScene(Scene):

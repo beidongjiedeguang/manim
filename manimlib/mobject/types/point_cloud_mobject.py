@@ -1,9 +1,9 @@
-from manimlib.constants import *
-from manimlib.mobject.mobject import Mobject
-from manimlib.utils.color import color_gradient
-from manimlib.utils.color import color_to_rgba
-from manimlib.utils.iterables import resize_with_interpolation
-from manimlib.utils.iterables import resize_array
+from ...constants import *
+from ...mobject.mobject import Mobject
+from ...utils.color import color_gradient
+from ...utils.color import color_to_rgba
+from ...utils.iterables import resize_with_interpolation
+from ...utils.iterables import resize_array
 
 
 class PMobject(Mobject):

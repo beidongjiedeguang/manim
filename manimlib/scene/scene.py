@@ -5,23 +5,23 @@ import itertools as it
 import logging
 from functools import wraps
 
+import streamlit as st
 from tqdm import tqdm as ProgressDisplay
 import numpy as np
 import time
-
-from manimlib.animation.animation import prepare_animation
-from manimlib.animation.transform import MoveToTarget
-from manimlib.mobject.mobject import Point
-from manimlib.camera.camera import Camera
-from manimlib.constants import DEFAULT_WAIT_TIME
-from manimlib.mobject.mobject import Mobject
-from manimlib.scene.scene_file_writer import SceneFileWriter
-from manimlib.utils.config_ops import digest_config
-from manimlib.utils.family_ops import extract_mobject_family_members
-from manimlib.utils.family_ops import restructure_list_to_exclude_certain_family_members
-from manimlib.event_handler.event_type import EventType
-from manimlib.event_handler import EVENT_DISPATCHER
-from manimlib.window import Window
+from ..animation.animation import prepare_animation
+from ..animation.transform import MoveToTarget
+from ..mobject.mobject import Point
+from ..camera.camera import Camera
+from ..constants import DEFAULT_WAIT_TIME
+from ..mobject.mobject import Mobject
+from ..scene.scene_file_writer import SceneFileWriter
+from ..utils.config_ops import digest_config
+from ..utils.family_ops import extract_mobject_family_members
+from ..utils.family_ops import restructure_list_to_exclude_certain_family_members
+from ..event_handler.event_type import EventType
+from ..event_handler import EVENT_DISPATCHER
+from ..window import Window
 from pyglet.window import key
 
 
@@ -44,7 +44,7 @@ class Scene(object):
     def __init__(self, **kwargs):
         digest_config(self, kwargs)
         if self.preview:
-            from manimlib.window import Window
+            from ..window import Window
             self.window = Window(scene=self, **self.window_config)
             self.camera_config["ctx"] = self.window.ctx
         else:
@@ -62,6 +62,8 @@ class Scene(object):
         # Items associated with interaction
         self.mouse_point = Point()
         self.mouse_drag_point = Point()
+        self.use_streamlit = False
+        self.streamlit_bar_init = False
 
         # Much nicer to work with deterministic scenes
         if self.random_seed is not None:
@@ -200,6 +202,7 @@ class Scene(object):
                 for family in families
             ])
             return num_families == 1
+
         return list(filter(is_top_level, mobjects))
 
     def get_mobject_family_members(self):
@@ -281,15 +284,18 @@ class Scene(object):
         return time_progression
 
     def get_run_time(self, animations):
-        return np.max([animation.run_time for animation in animations])
+        runtime_list = [animation.run_time for animation in animations]
+        self.st_runtime_list = runtime_list
+        return np.max(runtime_list)
 
     def get_animation_time_progression(self, animations):
         run_time = self.get_run_time(animations)
         time_progression = self.get_time_progression(run_time)
-        time_progression.set_description("".join([
+        description = "".join([
             f"Animation {self.num_plays}: {animations[0]}",
             ", etc." if len(animations) > 1 else "",
-        ]))
+        ])
+        time_progression.set_description(description)
         return time_progression
 
     def get_wait_time_progression(self, duration, stop_condition):
@@ -397,6 +403,7 @@ class Scene(object):
                 self.file_writer.end_animation()
 
             self.num_plays += 1
+
         return wrapper
 
     def lock_static_mobject_data(self, *animations):
@@ -423,11 +430,25 @@ class Scene(object):
             if animation.mobject not in self.mobjects:
                 self.add(animation.mobject)
 
+    def _check_streamlit_bar(self):
+        if self.use_streamlit:
+            if self.streamlit_bar_init is False:
+                self.placeholder = st.empty()
+                self.streamlit_bar_init = True
+            self.st_progress = self.placeholder.progress(0)
+
+    def _show_streamlit_bar(self, t, max_run_time):
+        if self.use_streamlit:
+            self.st_progress.progress(t / max_run_time)
+
     def progress_through_animations(self, animations):
         last_t = 0
+        self._check_streamlit_bar()
+        max_run_time = self.get_run_time(animations)
         for t in self.get_animation_time_progression(animations):
             dt = t - last_t
             last_t = t
+            self._show_streamlit_bar(t, max_run_time)
             for animation in animations:
                 animation.update_mobjects(dt)
                 alpha = t / animation.run_time
@@ -466,9 +487,13 @@ class Scene(object):
             self.lock_static_mobject_data()
             time_progression = self.get_wait_time_progression(duration, stop_condition)
             last_t = 0
+            if self.use_streamlit:
+                self.st_progress2 = st.progress(0)
             for t in time_progression:
                 dt = t - last_t
                 last_t = t
+                if self.use_streamlit:
+                    self.st_progress2.progress(t / duration)
                 self.update_frame(dt)
                 self.emit_frame()
                 if stop_condition is not None and stop_condition():
@@ -574,7 +599,7 @@ class Scene(object):
         frame = self.camera.frame
         if self.window.is_key_pressed(ord("z")):
             factor = 1 + np.arctan(10 * offset[1])
-            frame.scale(1/factor, about_point=point)
+            frame.scale(1 / factor, about_point=point)
         else:
             transform = frame.get_inverse_camera_rotation_matrix()
             shift = np.dot(np.transpose(transform), offset)

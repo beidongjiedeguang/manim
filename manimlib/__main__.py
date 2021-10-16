@@ -1,20 +1,21 @@
 #!/usr/bin/env python
-import manimlib.config
-import manimlib.extract_scene
-import manimlib.utils.init_config
+from .config import parse_cli, get_configuration
+from .extract_scene import main
+from .utils.init_config import init_customization
 
 
 def main():
-    args = manimlib.config.parse_cli()
+    args = parse_cli()
 
     if args.config:
-        manimlib.utils.init_config.init_customization()
+        init_customization()
     else:
-        config = manimlib.config.get_configuration(args)
-        scenes = manimlib.extract_scene.main(config)
+        config = get_configuration(args)
+        scenes = main(config)
 
         for scene in scenes:
             scene.run()
+
 
 if __name__ == '__main__':
     main()

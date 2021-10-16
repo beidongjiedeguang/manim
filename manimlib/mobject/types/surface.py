@@ -1,13 +1,13 @@
 import numpy as np
 import moderngl
 
-from manimlib.constants import *
-from manimlib.mobject.mobject import Mobject
-from manimlib.utils.bezier import integer_interpolate
-from manimlib.utils.bezier import interpolate
-from manimlib.utils.images import get_full_raster_image_path
-from manimlib.utils.iterables import listify
-from manimlib.utils.space_ops import normalize_along_axis
+from ...constants import *
+from ...mobject.mobject import Mobject
+from ...utils.bezier import integer_interpolate
+from ...utils.bezier import interpolate
+from ...utils.images import get_full_raster_image_path
+from ...utils.iterables import listify
+from ...utils.space_ops import normalize_along_axis
 
 
 class Surface(Mobject):
