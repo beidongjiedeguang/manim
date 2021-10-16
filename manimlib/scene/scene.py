@@ -22,7 +22,8 @@ from ..utils.family_ops import restructure_list_to_exclude_certain_family_member
 from ..event_handler.event_type import EventType
 from ..event_handler import EVENT_DISPATCHER
 from ..logger import log
-
+from ..window import Window
+from pyglet.window import key
 
 class Scene(object):
     CONFIG = {
