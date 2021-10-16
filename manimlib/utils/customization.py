@@ -18,6 +18,6 @@ def get_customization():
 
         # Assumes all shaders are written into ./shaders
         directories["shaders"] = os.path.join(
-            get_manim_dir(), ".", "shaders"
+            get_manim_dir(), "manimlib", "shaders"
         )
     return CUSTOMIZATION
