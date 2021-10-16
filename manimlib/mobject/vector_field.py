@@ -2,21 +2,21 @@ import numpy as np
 import itertools as it
 import random
 
-from manimlib.constants import *
+from ..constants import *
 
-from manimlib.animation.composition import AnimationGroup
-from manimlib.animation.indication import VShowPassingFlash
-from manimlib.mobject.geometry import Arrow
-from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.mobject.types.vectorized_mobject import VMobject
-from manimlib.utils.bezier import inverse_interpolate
-from manimlib.utils.bezier import interpolate
-from manimlib.utils.color import get_colormap_list
-from manimlib.utils.config_ops import merge_dicts_recursively
-from manimlib.utils.config_ops import digest_config
-from manimlib.utils.rate_functions import linear
-from manimlib.utils.simple_functions import sigmoid
-from manimlib.utils.space_ops import get_norm
+from ..animation.composition import AnimationGroup
+from ..animation.indication import VShowPassingFlash
+from ..mobject.geometry import Arrow
+from ..mobject.types.vectorized_mobject import VGroup
+from ..mobject.types.vectorized_mobject import VMobject
+from ..utils.bezier import inverse_interpolate
+from ..utils.bezier import interpolate
+from ..utils.color import get_colormap_list
+from ..utils.config_ops import merge_dicts_recursively
+from ..utils.config_ops import digest_config
+from ..utils.rate_functions import linear
+from ..utils.simple_functions import sigmoid
+from ..utils.space_ops import get_norm
 
 
 def get_vectorized_rgb_gradient_function(min_value, max_value, color_map):

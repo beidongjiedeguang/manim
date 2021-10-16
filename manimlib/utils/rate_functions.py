@@ -1,6 +1,6 @@
 import numpy as np
 
-from manimlib.utils.bezier import bezier
+from ..utils.bezier import bezier
 
 
 def linear(t):

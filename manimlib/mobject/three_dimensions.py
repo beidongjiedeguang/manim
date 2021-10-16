@@ -1,15 +1,15 @@
 import math
 
-from manimlib.constants import *
-from manimlib.mobject.types.surface import Surface
-from manimlib.mobject.types.surface import SGroup
-from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.mobject.types.vectorized_mobject import VMobject
-from manimlib.mobject.geometry import Square
-from manimlib.utils.config_ops import digest_config
-from manimlib.utils.space_ops import get_norm
-from manimlib.utils.space_ops import z_to_vector
-from manimlib.utils.space_ops import compass_directions
+from ..constants import *
+from ..mobject.types.surface import Surface
+from ..mobject.types.surface import SGroup
+from ..mobject.types.vectorized_mobject import VGroup
+from ..mobject.types.vectorized_mobject import VMobject
+from ..mobject.geometry import Square
+from ..utils.config_ops import digest_config
+from ..utils.space_ops import get_norm
+from ..utils.space_ops import z_to_vector
+from ..utils.space_ops import compass_directions
 
 
 class SurfaceMesh(VGroup):

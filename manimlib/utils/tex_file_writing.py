@@ -3,10 +3,10 @@ import os
 import hashlib
 from contextlib import contextmanager
 
-from manimlib.utils.directories import get_tex_dir
-from manimlib.config import get_manim_dir
-from manimlib.config import get_custom_config
-from manimlib.logger import log
+from ..utils.directories import get_tex_dir
+from ..config import get_manim_dir
+from ..config import get_custom_config
+from ..logger import log
 
 
 SAVED_TEX_CONFIG = {}

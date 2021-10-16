@@ -1,21 +1,20 @@
-import numpy as np
 import numbers
 
-from manimlib.constants import *
-from manimlib.mobject.functions import ParametricCurve
-from manimlib.mobject.geometry import Arrow
-from manimlib.mobject.geometry import Line
-from manimlib.mobject.geometry import DashedLine
-from manimlib.mobject.geometry import Rectangle
-from manimlib.mobject.number_line import NumberLine
-from manimlib.mobject.svg.tex_mobject import Tex
-from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.utils.config_ops import digest_config
-from manimlib.utils.config_ops import merge_dicts_recursively
-from manimlib.utils.simple_functions import binary_search
-from manimlib.utils.space_ops import angle_of_vector
-from manimlib.utils.space_ops import get_norm
-from manimlib.utils.space_ops import rotate_vector
+from ..constants import *
+from ..mobject.functions import ParametricCurve
+from ..mobject.geometry import Arrow
+from ..mobject.geometry import Line
+from ..mobject.geometry import DashedLine
+from ..mobject.geometry import Rectangle
+from ..mobject.number_line import NumberLine
+from ..mobject.svg.tex_mobject import Tex
+from ..mobject.types.vectorized_mobject import VGroup
+from ..utils.config_ops import digest_config
+from ..utils.config_ops import merge_dicts_recursively
+from ..utils.simple_functions import binary_search
+from ..utils.space_ops import angle_of_vector
+from ..utils.space_ops import get_norm
+from ..utils.space_ops import rotate_vector
 
 EPSILON = 1e-8
 

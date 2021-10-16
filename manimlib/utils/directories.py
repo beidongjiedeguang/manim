@@ -1,7 +1,7 @@
 import os
 
-from manimlib.utils.file_ops import guarantee_existence
-from manimlib.utils.customization import get_customization
+from ..utils.file_ops import guarantee_existence
+from ..utils.customization import get_customization
 
 
 def get_directories():

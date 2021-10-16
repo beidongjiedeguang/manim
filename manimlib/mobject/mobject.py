@@ -7,31 +7,31 @@ from functools import wraps
 
 import numpy as np
 
-from manimlib.constants import *
-from manimlib.utils.color import color_gradient
-from manimlib.utils.color import get_colormap_list
-from manimlib.utils.color import rgb_to_hex
-from manimlib.utils.color import color_to_rgb
-from manimlib.utils.config_ops import digest_config
-from manimlib.utils.iterables import batch_by_property
-from manimlib.utils.iterables import list_update
-from manimlib.utils.iterables import resize_array
-from manimlib.utils.iterables import resize_preserving_order
-from manimlib.utils.iterables import resize_with_interpolation
-from manimlib.utils.iterables import make_even
-from manimlib.utils.iterables import listify
-from manimlib.utils.bezier import interpolate
-from manimlib.utils.bezier import integer_interpolate
-from manimlib.utils.paths import straight_path
-from manimlib.utils.simple_functions import get_parameters
-from manimlib.utils.space_ops import angle_of_vector
-from manimlib.utils.space_ops import get_norm
-from manimlib.utils.space_ops import rotation_matrix_transpose
-from manimlib.shader_wrapper import ShaderWrapper
-from manimlib.shader_wrapper import get_colormap_code
-from manimlib.event_handler import EVENT_DISPATCHER
-from manimlib.event_handler.event_listner import EventListner
-from manimlib.event_handler.event_type import EventType
+from ..constants import *
+from ..utils.color import color_gradient
+from ..utils.color import get_colormap_list
+from ..utils.color import rgb_to_hex
+from ..utils.color import color_to_rgb
+from ..utils.config_ops import digest_config
+from ..utils.iterables import batch_by_property
+from ..utils.iterables import list_update
+from ..utils.iterables import resize_array
+from ..utils.iterables import resize_preserving_order
+from ..utils.iterables import resize_with_interpolation
+from ..utils.iterables import make_even
+from ..utils.iterables import listify
+from ..utils.bezier import interpolate
+from ..utils.bezier import integer_interpolate
+from ..utils.paths import straight_path
+from ..utils.simple_functions import get_parameters
+from ..utils.space_ops import angle_of_vector
+from ..utils.space_ops import get_norm
+from ..utils.space_ops import rotation_matrix_transpose
+from ..shader_wrapper import ShaderWrapper
+from ..shader_wrapper import get_colormap_code
+from ..event_handler import EVENT_DISPATCHER
+from ..event_handler.event_listner import EventListner
+from ..event_handler.event_type import EventType
 
 
 class Mobject(object):
@@ -987,7 +987,7 @@ class Mobject(object):
     def add_background_rectangle(self, color=None, opacity=0.75, **kwargs):
         # TODO, this does not behave well when the mobject has points,
         # since it gets displayed on top
-        from manimlib.mobject.shape_matchers import BackgroundRectangle
+        from ..mobject.shape_matchers import BackgroundRectangle
         self.background_rectangle = BackgroundRectangle(
             self, color=color,
             fill_opacity=opacity,
@@ -1669,7 +1669,7 @@ class _AnimationBuilder:
         return update_target
 
     def build(self):
-        from manimlib.animation.transform import _MethodAnimation
+        from ..animation.transform import _MethodAnimation
 
         if self.overridden_animation:
             return self.overridden_animation

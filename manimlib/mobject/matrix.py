@@ -1,14 +1,14 @@
 import numpy as np
 import itertools as it
 
-from manimlib.constants import *
-from manimlib.mobject.numbers import DecimalNumber
-from manimlib.mobject.numbers import Integer
-from manimlib.mobject.shape_matchers import BackgroundRectangle
-from manimlib.mobject.svg.tex_mobject import Tex
-from manimlib.mobject.svg.tex_mobject import TexText
-from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.mobject.types.vectorized_mobject import VMobject
+from ..constants import *
+from ..mobject.numbers import DecimalNumber
+from ..mobject.numbers import Integer
+from ..mobject.shape_matchers import BackgroundRectangle
+from ..mobject.svg.tex_mobject import Tex
+from ..mobject.svg.tex_mobject import TexText
+from ..mobject.types.vectorized_mobject import VGroup
+from ..mobject.types.vectorized_mobject import VMobject
 
 VECTOR_LABEL_SCALE_FACTOR = 0.8
 

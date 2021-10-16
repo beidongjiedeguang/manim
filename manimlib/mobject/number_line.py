@@ -1,11 +1,11 @@
-from manimlib.constants import *
-from manimlib.mobject.geometry import Line
-from manimlib.mobject.numbers import DecimalNumber
-from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.utils.bezier import interpolate
-from manimlib.utils.config_ops import digest_config
-from manimlib.utils.config_ops import merge_dicts_recursively
-from manimlib.utils.simple_functions import fdiv
+from ..constants import *
+from ..mobject.geometry import Line
+from ..mobject.numbers import DecimalNumber
+from ..mobject.types.vectorized_mobject import VGroup
+from ..utils.bezier import interpolate
+from ..utils.config_ops import digest_config
+from ..utils.config_ops import merge_dicts_recursively
+from ..utils.simple_functions import fdiv
 
 
 class NumberLine(Line):

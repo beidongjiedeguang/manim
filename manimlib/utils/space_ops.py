@@ -4,12 +4,12 @@ from functools import reduce
 import math
 from mapbox_earcut import triangulate_float32 as earcut
 
-from manimlib.constants import RIGHT
-from manimlib.constants import DOWN
-from manimlib.constants import OUT
-from manimlib.constants import PI
-from manimlib.constants import TAU
-from manimlib.utils.iterables import adjacent_pairs
+from ..constants import RIGHT
+from ..constants import DOWN
+from ..constants import OUT
+from ..constants import PI
+from ..constants import TAU
+from ..utils.iterables import adjacent_pairs
 
 
 def get_norm(vect):
