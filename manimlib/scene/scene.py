@@ -25,6 +25,7 @@ from ..logger import log
 from ..window import Window
 from pyglet.window import key
 
+
 class Scene(object):
     CONFIG = {
         "window_config": {},
@@ -107,7 +108,7 @@ class Scene(object):
         # which updates the frame while under
         # the hood calling the pyglet event loop
         log.info("Tips: You are now in the interactive mode. Now you can use the keyboard"
-            " and the mouse to interact with the scene. Just press `q` if you want to quit.")
+                 " and the mouse to interact with the scene. Just press `q` if you want to quit.")
         self.quit_interaction = False
         self.lock_static_mobject_data()
         while not (self.window.is_closing or self.quit_interaction):
@@ -140,7 +141,7 @@ class Scene(object):
         for term in ("play", "wait", "add", "remove", "clear", "save_state", "restore"):
             local_ns[term] = getattr(self, term)
         log.info("Tips: Now the embed iPython terminal is open. But you can't interact with"
-            " the window directly. To do so, you need to type `touch()` or `self.interact()`")
+                 " the window directly. To do so, you need to type `touch()` or `self.interact()`")
         shell(local_ns=local_ns, stack_depth=2)
         # End scene when exiting an embed.
         raise EndSceneEarlyException()
@@ -594,6 +595,17 @@ class Scene(object):
         propagate_event = EVENT_DISPATCHER.dispatch(EventType.MouseDragEvent, **event_data)
         if propagate_event is not None and propagate_event is False:
             return
+        frame = self.camera.frame
+        if buttons == 1:
+            frame.increment_theta(-d_point[0] * 1.5)
+            frame.increment_phi(d_point[1] * 1.5)
+        elif buttons == 4:
+            shift = -d_point
+            shift[0] *= frame.get_width() / 2
+            shift[1] *= frame.get_height() / 2
+            transform = frame.get_inverse_camera_rotation_matrix()
+            shift = np.dot(np.transpose(transform), shift)
+            frame.shift(shift)
 
     def on_mouse_press(self, point, button, mods):
         event_data = {"point": point, "button": button, "mods": mods}
@@ -614,13 +626,13 @@ class Scene(object):
             return
 
         frame = self.camera.frame
-        if self.window.is_key_pressed(ord("z")):
+        if self.window.is_key_pressed(key.Z) or self.window.is_key_pressed(key.LCTRL):
             factor = 1 + np.arctan(27 * offset[1])
             frame.scale(1 / factor, about_point=point)
         else:
             transform = frame.get_inverse_camera_rotation_matrix()
             shift = np.dot(np.transpose(transform), offset)
-            frame.shift(-20.0 * shift)
+            frame.shift(-100.0 * shift)
 
     def on_key_release(self, symbol, modifiers):
         event_data = {"symbol": symbol, "modifiers": modifiers}
@@ -649,7 +661,7 @@ class Scene(object):
         elif symbol in (key.Q, key.TAB):  # key.APOSTROPHE,
             self.quit_interaction = True
 
-        elif symbol in (key.SPACE, key.RCTRL, key.LCTRL):
+        elif symbol in (key.SPACE, key.LALT, key.RALT):
             self.pause = self.pause ^ 1
             time_pause_start = time.time()
             if self.pause:
