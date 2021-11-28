@@ -53,6 +53,7 @@ from .mobject.vector_field import *
 
 from .scene.scene import *
 from .scene.three_d_scene import *
+from .mobject.boolean_ops import *
 
 from .utils.bezier import *
 from .utils.color import *
