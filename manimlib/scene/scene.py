@@ -604,7 +604,7 @@ class Scene(object):
 
         frame = self.camera.frame
         if self.window.is_key_pressed(ord("z")):
-            factor = 1 + np.arctan(10 * offset[1])
+            factor = 1 + np.arctan(27 * offset[1])
             frame.scale(1 / factor, about_point=point)
         else:
             transform = frame.get_inverse_camera_rotation_matrix()
