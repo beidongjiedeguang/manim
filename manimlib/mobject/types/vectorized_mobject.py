@@ -12,6 +12,7 @@ from ...utils.bezier import get_smooth_quadratic_bezier_handle_points
 from ...utils.bezier import get_smooth_cubic_bezier_handle_points
 from ...utils.bezier import get_quadratic_approximation_of_cubic
 from ...utils.bezier import interpolate
+from ...utils.bezier import inverse_interpolate
 from ...utils.bezier import integer_interpolate
 from ...utils.bezier import partial_quadratic_bezier_points
 from ...utils.color import rgb_to_hex
