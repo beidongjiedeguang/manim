@@ -24,6 +24,7 @@ from .camera.camera import *
 
 from .window import *
 
+from .mobject.boolean_ops import *
 from .mobject.coordinate_systems import *
 from .mobject.changing import *
 from .mobject.frame import *
@@ -53,7 +54,6 @@ from .mobject.vector_field import *
 
 from .scene.scene import *
 from .scene.three_d_scene import *
-from .mobject.boolean_ops import *
 
 from .utils.bezier import *
 from .utils.color import *

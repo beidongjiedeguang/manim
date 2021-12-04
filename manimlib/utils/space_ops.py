@@ -3,13 +3,20 @@ import operator as op
 from functools import reduce
 import math
 from mapbox_earcut import triangulate_float32 as earcut
-
 from ..constants import RIGHT
 from ..constants import DOWN
 from ..constants import OUT
 from ..constants import PI
 from ..constants import TAU
 from ..utils.iterables import adjacent_pairs
+
+
+def cross(v1, v2):
+    return [
+        v1[1] * v2[2] - v1[2] * v2[1],
+        v1[2] * v2[0] - v1[0] * v2[2],
+        v1[0] * v2[1] - v1[1] * v2[0]
+    ]
 
 
 def get_norm(vect):
@@ -147,6 +154,15 @@ def z_to_vector(vector):
     return rotation_matrix(angle, axis=axis)
 
 
+def rotation_between_vectors(v1, v2):
+    if np.all(np.isclose(v1, v2)):
+        return np.identity(3)
+    return rotation_matrix(
+        angle=angle_between_vectors(v1, v2),
+        axis=normalize(np.cross(v1, v2))
+    )
+
+
 def angle_of_vector(vector):
     """
     Returns polar coordinate theta when vector is project on xy plane
@@ -159,8 +175,7 @@ def angle_between_vectors(v1, v2):
     Returns the angle between two 3D vectors.
     This angle will always be btw 0 and pi
     """
-    diff = (angle_of_vector(v2) - angle_of_vector(v1)) % TAU
-    return min(diff, TAU - diff)
+    return math.acos(clip(np.dot(normalize(v1), normalize(v2)), -1, 1))
 
 
 def project_along_vector(point, vector):
@@ -184,14 +199,6 @@ def normalize_along_axis(array, axis, fall_back=None):
     buffed_norms = np.repeat(norms, array.shape[axis]).reshape(array.shape)
     array /= buffed_norms
     return array
-
-
-def cross(v1, v2):
-    return np.array([
-        v1[1] * v2[2] - v1[2] * v2[1],
-        v1[2] * v2[0] - v1[0] * v2[2],
-        v1[0] * v2[1] - v1[1] * v2[0]
-    ])
 
 
 def get_unit_normal(v1, v2, tol=1e-6):

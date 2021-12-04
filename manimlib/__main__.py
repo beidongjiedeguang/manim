@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import manimlib.logger
+import manimlib
 from manimlib import __version__
 from .config import parse_cli, get_configuration
 from . import extract_scene
