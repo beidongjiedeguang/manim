@@ -1,5 +1,7 @@
+# Deprecated
+
 # manim_kunyuan
-[![image](https://img.shields.io/badge/Pypi-0.31-green.svg)](https://pypi.org/project/manim_kunyuan)
+[![image](https://img.shields.io/badge/Pypi-0.35-green.svg)](https://pypi.org/project/manim_kunyuan)
 [![image](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/)
 [![image](https://img.shields.io/badge/license--blue.svg)](LICENSE)
 [![image](https://img.shields.io/badge/author-kunyuan-orange.svg?style=flat-square&logo=appveyor)](https://github.com/beidongjiedeguang)
@@ -17,8 +19,11 @@ mapbox-earcut
 matplotlib
 moderngl
 moderngl_window
+skia-pathops
 pydub
+pygments
 pyyaml
+rich
 screeninfo
 pyreadline; sys_platform == 'win32'
 validators

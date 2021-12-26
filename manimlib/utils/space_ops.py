@@ -175,7 +175,7 @@ def angle_between_vectors(v1, v2):
     Returns the angle between two 3D vectors.
     This angle will always be btw 0 and pi
     """
-    return math.acos(clip(np.dot(normalize(v1), normalize(v2)), -1, 1))
+    return math.acos(np.clip(np.dot(normalize(v1), normalize(v2)), -1, 1))
 
 
 def project_along_vector(point, vector):

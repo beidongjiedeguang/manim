@@ -200,7 +200,9 @@ class SceneFileWriter(object):
                 '-vcodec', 'qtrle',
             ]
         elif self.movie_file_extension == ".gif":
-            command += []
+            command += [
+                "-vf", f"vflip,fps=30,split[s0][s1];[s0]palettegen=stats_mode=diff[p];[s1][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle",
+            ]
         else:
             command += [
                 '-vcodec', 'libx264',

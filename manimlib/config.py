@@ -315,6 +315,7 @@ def get_configuration(args):
         "start_at_animation_number": args.start_at_animation_number,
         "preview": not write_file,
         "end_at_animation_number": None,
+
         "leave_progress_bars": args.leave_progress_bars,
     }
 
@@ -323,35 +324,37 @@ def get_configuration(args):
 
     # Default to making window half the screen size
     # but make it full screen if -f is passed in
-    monitors = get_monitors()
-    mon_index = custom_config["window_monitor"]
-    monitor = monitors[min(mon_index, len(monitors) - 1)]
-    window_width = monitor.width
+    if config['preview']:
+        monitors = get_monitors()
+        mon_index = custom_config["window_monitor"]
+        monitor = monitors[min(mon_index, len(monitors) - 1)]
+        window_width = monitor.width
 
-    if args.full_screen:
-        pass
-    else:
-        try:
-            if args.screen_size == Size.biggest:
-                pass
-            elif args.screen_size == Size.small:
-                window_width //= 3
-            elif args.screen_size == Size.medium:
+        if args.full_screen:
+            pass
+        else:
+            try:
+                if args.screen_size == Size.biggest:
+                    pass
+                elif args.screen_size == Size.small:
+                    window_width //= 3
+                elif args.screen_size == Size.medium:
+                    window_width //= 2
+                elif args.screen_size == Size.big:
+                    window_width = int(window_width / 1.5)
+                elif args.screen_size == Size.bigger:
+                    window_width = int(window_width / 1.25)
+                else:
+                    raise ValueError('Invalid screen_size parameter.')
+            except:
                 window_width //= 2
-            elif args.screen_size == Size.big:
-                window_width = int(window_width / 1.5)
-            elif args.screen_size == Size.bigger:
-                window_width = int(window_width / 1.25)
-            else:
-                raise ValueError('Invalid screen_size parameter.')
-        except:
-            window_width //= 2
 
-    window_height = window_width * 9 // 16
-    config["window_config"] = {
-        "size": (window_width, window_height),
-    }
-
+        window_height = window_width * 9 // 16
+        config["window_config"] = {
+            "size": (window_width, window_height)
+        }
+    else:
+        config["window_config"] = {}
     # Arguments related to skipping
     stan = config["start_at_animation_number"]
     if stan is not None:

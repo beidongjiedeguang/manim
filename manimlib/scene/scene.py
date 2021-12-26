@@ -4,7 +4,6 @@ import platform
 import itertools as it
 from functools import wraps
 
-import streamlit as st
 from tqdm import tqdm as ProgressDisplay
 import numpy as np
 import time
@@ -22,8 +21,6 @@ from ..utils.family_ops import restructure_list_to_exclude_certain_family_member
 from ..event_handler.event_type import EventType
 from ..event_handler import EVENT_DISPATCHER
 from ..logger import log
-from ..window import Window
-from pyglet.window import key
 
 
 class Scene(object):
@@ -45,7 +42,9 @@ class Scene(object):
     def __init__(self, **kwargs):
         digest_config(self, kwargs)
         if self.preview:
+            global key, Window
             from ..window import Window
+            from manimlib.logger import log
             self.window = Window(scene=self, **self.window_config)
             self.camera_config["ctx"] = self.window.ctx
             self.camera_config["frame_rate"] = 30  # Where's that 30 from?
@@ -447,6 +446,7 @@ class Scene(object):
     def _check_streamlit_bar(self):
         if self.use_streamlit:
             if self.streamlit_bar_init is False:
+                import streamlit as st
                 self.placeholder = st.empty()
                 self.streamlit_bar_init = True
             self.st_progress = self.placeholder.progress(0)
@@ -499,6 +499,7 @@ class Scene(object):
             time_progression = self.get_wait_time_progression(duration, stop_condition)
             last_t = 0
             if self.use_streamlit:
+                import streamlit as st
                 self.st_progress2 = st.progress(0)
             for t in time_progression:
                 dt = t - last_t

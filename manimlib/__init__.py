@@ -22,7 +22,6 @@ from .animation.update import *
 
 from .camera.camera import *
 
-from .window import *
 
 from .mobject.boolean_ops import *
 from .mobject.coordinate_systems import *
@@ -30,7 +29,6 @@ from .mobject.changing import *
 from .mobject.frame import *
 from .mobject.functions import *
 from .mobject.geometry import *
-from .mobject.interactive import *
 from .mobject.matrix import *
 from .mobject.mobject import *
 from .mobject.number_line import *
